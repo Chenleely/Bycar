@@ -11,8 +11,8 @@ import java.util.List;
 
 public class BaseViewModel extends ViewModel {
     private String mTag="BaseViewModel";
-    private MutableLiveData<Boolean> isLogin;//记录登陆状态，默认为false
-    private MutableLiveData<Boolean> screenState;//记录屏幕状态，true为打开，false为关闭
+    private MutableLiveData<Boolean> isLogin=new MutableLiveData<>();//记录登陆状态，默认为false
+    private MutableLiveData<Boolean> screenState=new MutableLiveData<>();//记录屏幕状态，true为打开，false为关闭
     public MutableLiveData<Boolean> getIsLogin() {
         return isLogin;
     }

@@ -2,11 +2,17 @@ package com.lzhihua.bycar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.commonui.CommonDialog;
+import com.lzhihua.bycar.commonui.PopupDialog;
+import com.lzhihua.bycar.ui.LoginDialog;
+import com.lzhihua.bycar.ui.MainActivity;
 
 public class StartActivity extends BaseActivity {
 
@@ -14,25 +20,15 @@ public class StartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        initDialog();
-    }
-    private void initDialog() {
-        final CommonDialog dialog = new CommonDialog(StartActivity.this);
-        dialog.setMessage("这是一个自定义Dialog。")
-                .setImageResId(R.mipmap.ic_launcher)
-//                .setTitle("系统提示")
-                .setSingle(false).setOnClickBottomListener(new CommonDialog.OnClickBottomListener() {
+        Button button=(Button) findViewById(R.id.show);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPositiveClick() {
-                dialog.dismiss();
-                Toast.makeText(StartActivity.this,"xxxx",Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Intent intent=new Intent(StartActivity.this, MainActivity.class);
+                startActivity(intent);
+//                LoginDialog loginDialog=new LoginDialog(StartActivity.this,0);
+//                loginDialog.show();
             }
-
-            @Override
-            public void onNegtiveClick() {
-                dialog.dismiss();
-                Toast.makeText(StartActivity.this,"ssss",Toast.LENGTH_SHORT).show();
-            }
-        }).show();
+        });
     }
 }
