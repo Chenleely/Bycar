@@ -33,7 +33,13 @@ public class LoginDialog extends PopupDialog {
     private ViewStub forgetStub;
     private View forgetView;
 
-    public LoginDialog(Context context,int type) {
+    private DialogListener listener;
+
+    public void setListener(DialogListener listener) {
+        this.listener = listener;
+    }
+
+    public LoginDialog(Context context, int type) {
 
         super(context, R.layout.activity_login,0);
         registerStub=(ViewStub) mView.findViewById(R.id.login_create_user);
@@ -117,7 +123,16 @@ public class LoginDialog extends PopupDialog {
     private void initForget(){
 
     }
+
+    @Override
+    public void dismiss() {
+        listener.onDismiss(true);
+    }
+
     private void showToast(String msg){
         Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+    }
+    public interface DialogListener{
+        void onDismiss(boolean isSuccess);
     }
 }

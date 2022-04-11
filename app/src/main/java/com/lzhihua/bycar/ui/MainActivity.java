@@ -12,9 +12,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.lzhihua.bycar.R;
+import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private ActivityMainBinding mainBinding;
     private int currentIndex=0;//1:more  2:car   3:impair    4:mine
     private FragmentManager fragmentManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWhiteStatusBar();
         mainBinding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         fragmentManager=getSupportFragmentManager();
@@ -67,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     currentIndex=2;
                     mainBinding.mainBottom.bottomCarIv.setImageDrawable(resources.getDrawable(R.drawable.ic_car_select));
-                    replaceFragment(new CarFragment());
+                    CarFragment carFragment=new CarFragment();
+                    carFragment.setmActivity(MainActivity.this);
+                    replaceFragment(carFragment);
                     break;
                 case 3:
                     currentIndex=3;

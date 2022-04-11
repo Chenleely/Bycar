@@ -51,7 +51,8 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_gravity="center_horizontal"
-            android:layout_height="25dp"
+            android:layout_marginTop="2dp"
+            android:layout_height="23dp"
             android:id="@+id/bottom_impair_iv"
             android:background="@drawable/bottom_impair"/>
         <TextView

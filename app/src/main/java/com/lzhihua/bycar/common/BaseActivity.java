@@ -4,8 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +21,7 @@ import com.lzhihua.bycar.ui.LoginDialog;
 
 public class BaseActivity extends AppCompatActivity{
 //    protected NetworkUtil networkUtil=NetworkUtil.getInstance();
-    public static final String loginAction="Bycar.ACTION.LOGIN";
-    public static final String logoutAction="Bycar.ACTION.LOGOUT";
-    protected BroadcastReceiver screenStateReceiver;
-    protected BroadcastReceiver loginStateReceiver;//自定义广播
+    public static boolean isLogin=true;
     private BaseViewModel mViewModel;
     public void setmViewModel(BaseViewModel mViewModel) {
         this.mViewModel = mViewModel;
@@ -27,11 +29,6 @@ public class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initBroadCastReceiver();
-        registerReceiver(screenStateReceiver,new IntentFilter(Intent.ACTION_SCREEN_OFF));
-        registerReceiver(screenStateReceiver,new IntentFilter(Intent.ACTION_SCREEN_ON));
-        registerReceiver(loginStateReceiver,new IntentFilter(BaseActivity.loginAction));
-        registerReceiver(loginStateReceiver,new IntentFilter(BaseActivity.logoutAction));
         MyViewModelFactory factory=new MyViewModelFactory();
         mViewModel=new ViewModelProvider(this,factory).get(BaseViewModel.class);
         mViewModel.getScreenState().observe(this, new Observer<Boolean>() {
@@ -85,45 +82,23 @@ public class BaseActivity extends AppCompatActivity{
         super.onBackPressed();
     }
 
-
-    //注册登陆、屏幕状态广播接收器
-    private void initBroadCastReceiver(){
-        loginStateReceiver=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action=intent.getAction();
-                if (!TextUtils.isEmpty(action)){
-                    switch (action){
-                        case Intent.ACTION_SCREEN_ON:
-                            mViewModel.getScreenState().postValue(true);
-                            break;
-                        case Intent.ACTION_SCREEN_OFF:
-                            mViewModel.getScreenState().postValue(false);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        };
-        screenStateReceiver=new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action=intent.getAction();
-                if (!TextUtils.isEmpty(action)){
-                    switch (action){
-                        case BaseActivity.loginAction:
-                            mViewModel.getIsLogin().postValue(true);
-                            break;
-                        case BaseActivity.logoutAction:
-                            mViewModel.getIsLogin().postValue(false);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        };
+    public void setWhiteStatusBar(){
+        Window window = this.getWindow();
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//设置状态栏字体颜色为黑色
+        window.setStatusBarColor(Color.TRANSPARENT);//状态栏透明
     }
-
+    public  void setTransparentStatusBar() {
+        //5.0及以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View decorView = this.getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            decorView.setSystemUiVisibility(option);
+            this.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            //4.4到5.0
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = this.getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+    }
 }

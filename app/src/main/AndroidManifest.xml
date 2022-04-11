@@ -10,6 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bycar">
         <activity
+            android:name=".ui.CareActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.TryCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.PurchaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ImpairDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.NoticeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.OrderListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
