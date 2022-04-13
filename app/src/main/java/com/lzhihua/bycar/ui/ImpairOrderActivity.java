@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.common.BaseActivity;
 
-public class ImpairDetailActivity extends BaseActivity {
+public class ImpairOrderActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

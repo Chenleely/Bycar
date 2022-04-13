@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lzhihua.bycar">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    !--声明SD卡读写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bycar">
+        <activity
+            android:name=".ui.ImpairActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.CareActivity"
             android:exported="false" />
@@ -19,7 +25,7 @@
             android:name=".ui.PurchaseActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ImpairDetailActivity"
+            android:name=".ui.ImpairOrderActivity"
             android:exported="false" />
         <activity
             android:name=".ui.NoticeActivity"
@@ -32,9 +38,6 @@
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.LoginDialog"
             android:exported="false" />
         <activity
             android:name=".StartActivity"

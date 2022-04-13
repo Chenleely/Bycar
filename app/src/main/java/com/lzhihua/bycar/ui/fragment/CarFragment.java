@@ -1,4 +1,4 @@
-package com.lzhihua.bycar.ui;
+package com.lzhihua.bycar.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Rect;
@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.CarFragmentBinding;
+import com.lzhihua.bycar.ui.PurchaseActivity;
+import com.lzhihua.bycar.ui.TryCarActivity;
 import com.lzhihua.bycar.util.AnimationTools;
 
 public class CarFragment extends Fragment{
@@ -32,7 +34,7 @@ public class CarFragment extends Fragment{
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
                 Rect rect = new Rect();
-                if (!carFragmentBinding.carFragmentPurchase.getRoot().getGlobalVisibleRect(rect)){
+                if (!carFragmentBinding.carFragmentPurchase.carFragPurchaseTv1.getGlobalVisibleRect(rect)){
                     if(carFragmentBinding.carFragmentTopView.getRoot().getVisibility()==View.GONE){
                         carFragmentBinding.carFragmentTopView.getRoot().startAnimation(AnimationTools.getInstance(getContext()).alphaAniShow);
                     }
@@ -55,6 +57,30 @@ public class CarFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 startActivity(TryCarActivity.class);
+            }
+        });
+        carFragmentBinding.carFragmentPurchase.carFragPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(PurchaseActivity.class);
+            }
+        });
+        carFragmentBinding.carFragmentPurchase.carFragPurchase1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(PurchaseActivity.class);
+            }
+        });
+        carFragmentBinding.carFragmentTryCar.carFragTryCarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(TryCarActivity.class);
+            }
+        });
+        carFragmentBinding.carFragmentPurchase.carFragKnowMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(PurchaseActivity.class);
             }
         });
         return carFragmentBinding.getRoot();

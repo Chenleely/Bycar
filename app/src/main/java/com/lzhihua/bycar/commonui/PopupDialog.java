@@ -1,7 +1,10 @@
 package com.lzhihua.bycar.commonui;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,16 @@ public class PopupDialog {
     protected Context context;
     protected Dialog mDialog;
     protected View mView;
+    protected onDismissListener listener;
+    protected Bundle data;
+    public void setData(Bundle data) {
+        this.data = data;
+    }
+
+    public void setListener(onDismissListener listener) {
+        this.listener = listener;
+    }
+
     //0为默认 0.8 高度，1为自适应高度
     public PopupDialog(Context context,int resId,int heightType){
         this.context=context;
@@ -21,7 +34,6 @@ public class PopupDialog {
         mView=inflater.inflate(resId,null);
         mDialog=new Dialog(context, R.style.dialog);
         mDialog.setContentView(mView);
-
         Window dialogWindow=mDialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
         dialogWindow.setWindowAnimations(R.style.dialogWindowAnim);
@@ -42,5 +54,11 @@ public class PopupDialog {
     }
     public void dismiss(){
         mDialog.dismiss();
+        if(data!=null){
+            listener.onDismiss(data);
+        }
+    }
+    public interface onDismissListener{
+        void onDismiss(Bundle data);
     }
 }

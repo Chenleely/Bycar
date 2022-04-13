@@ -1,21 +1,23 @@
 package com.lzhihua.bycar.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.ActivityMainBinding;
+import com.lzhihua.bycar.ui.dialog.LoginDialog;
+import com.lzhihua.bycar.ui.fragment.CarFragment;
+import com.lzhihua.bycar.ui.fragment.ImpairFragment;
+import com.lzhihua.bycar.ui.fragment.MineFragment;
+import com.lzhihua.bycar.ui.fragment.MoreFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements LoginDialog.DialogListener {
     private ActivityMainBinding mainBinding;
     private int currentIndex=0;//1:more  2:car   3:impair    4:mine
     private FragmentManager fragmentManager;
@@ -31,6 +33,13 @@ public class MainActivity extends BaseActivity {
         initBottom();
         onBottomClick(1);
     }
+
+    @Override
+    protected void onResume() {
+        checkLogin();
+        super.onResume();
+    }
+
     private void initBottom(){
         mainBinding.mainBottom.bottomMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +85,9 @@ public class MainActivity extends BaseActivity {
                 case 3:
                     currentIndex=3;
                     mainBinding.mainBottom.bottomImpairIv.setImageDrawable(resources.getDrawable(R.drawable.ic_impair_select));
-                    replaceFragment(new ImpairFragment());
+                    ImpairFragment impairFragment=new ImpairFragment();
+                    impairFragment.setMainActivity(this);
+                    replaceFragment(impairFragment);
                     break;
                 case 4:
                     currentIndex=4;
@@ -108,5 +119,17 @@ public class MainActivity extends BaseActivity {
                 mainBinding.mainBottom.bottomMineIv.setImageDrawable(resources.getDrawable(R.drawable.ic_mine_not_select));
                 break;
         }
+    }
+    private void checkLogin(){
+        if (BaseActivity.isLogin==false){
+            LoginDialog loginDialog=new LoginDialog(this,0);
+            loginDialog.setListener(this);
+            loginDialog.show();
+        }
+    }
+
+    @Override
+    public void onDismiss(boolean isSuccess) {
+
     }
 }

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/round_dialog"
     android:layout_height="match_parent"
-    tools:context=".ui.LoginDialog">
+    tools:context=".ui.dialog.LoginDialog">
 
 <!--    注册模块-->
    <ViewStub

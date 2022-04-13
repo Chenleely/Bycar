@@ -3,21 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/bottom_car.xml" value="0.34791666666666665" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/bottom_impair.xml" value="0.34791666666666665" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/bottom_mine.xml" value="0.34791666666666665" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/bottom_more.xml" value="0.34791666666666665" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/car_buy_back.xml" value="0.34739583333333335" />
+        <entry key="..\:/Bycar/app/src/main/res/drawable/choose_dialog_bg.xml" value="0.34739583333333335" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/create_user_btn.xml" value="0.34791666666666665" />
+        <entry key="..\:/Bycar/app/src/main/res/drawable/impair_back.xml" value="0.34739583333333335" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/login_user_btn.xml" value="0.34791666666666665" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/order_round_bg.xml" value="0.16666666666666666" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/round_background.xml" value="0.20555555555555555" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/round_bg.xml" value="0.34791666666666665" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/round_bg_1.xml" value="0.34739583333333335" />
+        <entry key="..\:/Bycar/app/src/main/res/drawable/round_bg_2.xml" value="0.34739583333333335" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/round_bg_3.xml" value="0.34739583333333335" />
         <entry key="..\:/Bycar/app/src/main/res/drawable/round_dialog.xml" value="0.33229166666666665" />
         <entry key="..\:/Bycar/app/src/main/res/layout/_mpair_detail.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/about_us.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/activity_impair.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_impair_or_care.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_login.xml" value="0.33177083333333335" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_main.xml" value="0.33177083333333335" />
@@ -29,12 +34,19 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/bottom_bar.xml" value="0.3333333333333333" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fraggment_top_view.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment.xml" value="0.23060188542422044" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_bottom.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_purshase.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_try_car.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_order_card.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/choose_car_dialog.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/choose_city_dialog.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/choose_city_item.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/common_dialog_top.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/common_top_bar.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/create_user.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/custom_dialog.xml" value="0.33" />
         <entry key="..\:/Bycar/app/src/main/res/layout/forget_password.xml" value="0.16134751773049646" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/impair_fragment.xml" value="0.32518115942028986" />
         <entry key="..\:/Bycar/app/src/main/res/layout/login.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/mine_content.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/mine_fragment.xml" value="0.33125" />

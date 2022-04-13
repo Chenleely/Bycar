@@ -1,4 +1,4 @@
-package com.lzhihua.bycar.ui;
+package com.lzhihua.bycar.ui.dialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,6 +42,7 @@ public class LoginDialog extends PopupDialog {
     public LoginDialog(Context context, int type) {
 
         super(context, R.layout.activity_login,0);
+        mDialog.setCancelable(false);
         registerStub=(ViewStub) mView.findViewById(R.id.login_create_user);
         loginStub=(ViewStub) mView.findViewById(R.id.login_login_user);
         forgetStub=(ViewStub) mView.findViewById(R.id.forget_psw);

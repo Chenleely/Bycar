@@ -1,21 +1,21 @@
-package com.lzhihua.bycar.ui;
+package com.lzhihua.bycar.ui.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.MineFragmentBinding;
+import com.lzhihua.bycar.ui.ImpairOrderActivity;
+import com.lzhihua.bycar.ui.NoticeActivity;
+import com.lzhihua.bycar.ui.OrderListActivity;
+import com.lzhihua.bycar.ui.dialog.LoginDialog;
 
 public class MineFragment extends Fragment implements LoginDialog.DialogListener{
     private MineFragmentBinding mineFragmentBinding;
@@ -30,48 +30,30 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
         mineFragmentBinding=MineFragmentBinding.inflate(inflater,container,false);
         updateUI();
         //顶部调登录
-        mineFragmentBinding.mineTitle.mineTitleLoginMsg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLogin();
-            }
-        });
-        mineFragmentBinding.mineTitle.mineTitleAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLogin();
-            }
-        });
+        mineFragmentBinding.mineTitle.mineTitleLoginMsg.setOnClickListener(view -> showLogin());
+        mineFragmentBinding.mineTitle.mineTitleAvatar.setOnClickListener(view -> showLogin());
         //content部分
-        mineFragmentBinding.mineContent.mineContentBill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getContext(),OrderListActivity.class);
-                startActivity(intent);
-            }
+        mineFragmentBinding.mineContent.mineContentBill.setOnClickListener(view -> {
+            Intent intent=new Intent(getContext(), OrderListActivity.class);
+            startActivity(intent);
         });
-        mineFragmentBinding.mineContent.mineContentQuit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseActivity.isLogin=false;
-                updateUI();
-            }
+        mineFragmentBinding.mineContent.mineContentQuit.setOnClickListener(view -> {
+            BaseActivity.isLogin=false;
+            updateUI();
         });
-        mineFragmentBinding.mineContent.mineContentScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getContext(),NoticeActivity.class);
-                intent.putExtra("page_type",1);
-                startActivity(intent);
-            }
+        mineFragmentBinding.mineContent.mineContentScore.setOnClickListener(view -> {
+            Intent intent=new Intent(getContext(), NoticeActivity.class);
+            intent.putExtra("page_type",1);
+            startActivity(intent);
         });
-        mineFragmentBinding.mineContent.mineContentAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getContext(),NoticeActivity.class);
-                intent.putExtra("page_type",2);
-                startActivity(intent);
-            }
+        mineFragmentBinding.mineContent.mineContentAbout.setOnClickListener(view -> {
+            Intent intent=new Intent(getContext(),NoticeActivity.class);
+            intent.putExtra("page_type",2);
+            startActivity(intent);
+        });
+        mineFragmentBinding.mineContent.mineContentImpair.setOnClickListener(view -> {
+            Intent intent=new Intent(getContext(), ImpairOrderActivity.class);
+            startActivity(intent);
         });
         return mineFragmentBinding.getRoot();
     }
