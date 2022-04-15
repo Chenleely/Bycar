@@ -42,8 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:clickable="true"
             android:layout_marginTop="15dp"
+            android:clickable="true"
             android:orientation="horizontal">
 
             <TextView
@@ -187,11 +187,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:gravity="center"
-                android:cursorVisible="false"
-                android:hint="输入手机号"
                 android:background="@null"
+                android:cursorVisible="false"
                 android:digits="0123456789ABCDEF"
+                android:gravity="center"
+                android:hint="输入手机号"
                 android:inputType="textCapCharacters"
                 android:textColor="@color/main_color"
                 android:textSize="16dp" />

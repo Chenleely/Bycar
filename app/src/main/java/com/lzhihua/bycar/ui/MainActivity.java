@@ -16,6 +16,7 @@ import com.lzhihua.bycar.ui.fragment.CarFragment;
 import com.lzhihua.bycar.ui.fragment.ImpairFragment;
 import com.lzhihua.bycar.ui.fragment.MineFragment;
 import com.lzhihua.bycar.ui.fragment.MoreFragment;
+import com.lzhihua.bycar.util.SharedPrefTools;
 
 public class MainActivity extends BaseActivity implements LoginDialog.DialogListener {
     private ActivityMainBinding mainBinding;
@@ -34,11 +35,6 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
         onBottomClick(1);
     }
 
-    @Override
-    protected void onResume() {
-        checkLogin();
-        super.onResume();
-    }
 
     private void initBottom(){
         mainBinding.mainBottom.bottomMore.setOnClickListener(new View.OnClickListener() {
@@ -120,13 +116,7 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
                 break;
         }
     }
-    private void checkLogin(){
-        if (BaseActivity.isLogin==false){
-            LoginDialog loginDialog=new LoginDialog(this,0);
-            loginDialog.setListener(this);
-            loginDialog.show();
-        }
-    }
+
 
     @Override
     public void onDismiss(boolean isSuccess) {

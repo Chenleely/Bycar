@@ -38,12 +38,12 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
             startActivity(intent);
         });
         mineFragmentBinding.mineContent.mineContentQuit.setOnClickListener(view -> {
-            BaseActivity.isLogin=false;
+            BaseActivity.logout(getContext());
             updateUI();
         });
         mineFragmentBinding.mineContent.mineContentScore.setOnClickListener(view -> {
             Intent intent=new Intent(getContext(), NoticeActivity.class);
-            intent.putExtra("page_type",1);
+            intent.putExtra("page_type",0);
             startActivity(intent);
         });
         mineFragmentBinding.mineContent.mineContentAbout.setOnClickListener(view -> {
@@ -59,7 +59,7 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
     }
 
     private void showLogin(){
-        if (BaseActivity.isLogin==false){
+        if (BaseActivity.checkLogin(getContext())==false){
             LoginDialog loginDialog=new LoginDialog(getContext(),0);
             loginDialog.setListener(this);
             loginDialog.show();
@@ -69,11 +69,10 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
 //    登录状态
     @Override
     public void onDismiss(boolean isSuccess) {
-        BaseActivity.isLogin=isSuccess;
         updateUI();
     }
     private void updateUI(){
-        if (BaseActivity.isLogin==false){
+        if (!BaseActivity.checkLogin(getContext())){
             mineFragmentBinding.mineTitle.mineTitleLoginUid.setVisibility(View.GONE);
             mineFragmentBinding.mineContent.mineContentQuit.setVisibility(View.GONE);
             mineFragmentBinding.mineTitle.mineTitleLoginMsg.setText("登录/注册");

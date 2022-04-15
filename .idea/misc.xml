@@ -22,6 +22,7 @@
         <entry key="..\:/Bycar/app/src/main/res/drawable/round_dialog.xml" value="0.33229166666666665" />
         <entry key="..\:/Bycar/app/src/main/res/layout/_mpair_detail.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/about_us.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/activity_car_detail.xml" value="0.35778985507246375" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_impair.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_impair_or_care.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_login.xml" value="0.33177083333333335" />
@@ -38,6 +39,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_purshase.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_try_car.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_order_card.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/choose_car_card.xml" value="0.35778985507246375" />
         <entry key="..\:/Bycar/app/src/main/res/layout/choose_car_dialog.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/choose_city_dialog.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/choose_city_item.xml" value="0.33125" />
@@ -56,7 +58,10 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/order_card.xml" value="0.33" />
         <entry key="..\:/Bycar/app/src/main/res/layout/order_detail.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/order_list.xml" value="0.33" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/order_list_card.xml" value="0.33" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/purchase_car_card.xml" value="0.35778985507246375" />
         <entry key="..\:/Bycar/app/src/main/res/layout/test_dialog.xml" value="0.15374873353596757" />
+        <entry key="..\:/Bycar/app/src/main/res/xml/network_security_config.xml" value="0.12409420289855072" />
       </map>
     </option>
   </component>

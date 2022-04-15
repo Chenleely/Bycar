@@ -2,6 +2,7 @@ package com.lzhihua.bycar.ui.dialog;
 
 import android.content.Context;
 import android.os.HandlerThread;
+import android.view.LayoutInflater;
 
 import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.bean.CityList;
@@ -15,9 +16,12 @@ import java.util.logging.Handler;
 public class ChooseCarDialog extends PopupDialog {
     private ChooseCarDialogBinding chooseCarDialogBinding;
 
-    public ChooseCarDialog(Context context){
-        this(context, R.layout.choose_car_dialog,0);
+    public ChooseCarDialog(Context context) {
+        this(context, R.layout.choose_car_dialog, 0);
+        chooseCarDialogBinding = ChooseCarDialogBinding.inflate(LayoutInflater.from(context));
+        mDialog.setContentView(chooseCarDialogBinding.getRoot());
     }
+
     public ChooseCarDialog(Context context, int resId, int heightType) {
         super(context, resId, 0);
     }

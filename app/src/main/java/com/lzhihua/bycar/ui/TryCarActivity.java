@@ -23,7 +23,7 @@ public class TryCarActivity extends BaseActivity implements PopupDialog.onDismis
         activityTryCarBinding.tryCarTop.titleBack.setOnClickListener(view -> finish());
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        lp.rightMargin = UITools.dip2px(this, 20);
+        lp.rightMargin = UITools.dip2px( 20);
         activityTryCarBinding.tryCarTop.topTv.setLayoutParams(lp);
         activityTryCarBinding.tryCarTop.topTv.setText("试驾行程");
         activityTryCarBinding.tryCarTop.topTv.setOnClickListener(view -> {

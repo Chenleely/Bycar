@@ -14,5 +14,6 @@ public class StartActivity extends BaseActivity {
         setContentView(R.layout.activity_start);
         Intent intent = new Intent(StartActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

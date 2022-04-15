@@ -7,7 +7,7 @@ import java.util.Map;
 import okhttp3.Request;
 
 public class NetworkRepo {
-    public static final String Base_url = "";
+    public static final String Base_url = "http://louis296.top:8083";
 
     public static class OkhttpOption {
         private String url;
@@ -52,6 +52,7 @@ public class NetworkRepo {
         }
     }
 
+//    添加query参数
     public static String appendUri(String url, Map<String, String> params) {
         if (params == null) {
             return url;

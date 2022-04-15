@@ -66,14 +66,22 @@ public class ChooseCityDialog extends PopupDialog {
 
     private void queryProvinces() {
         names.clear();
-        CityRepo.queryProvinces(obj -> {
-            CityList.Province province = (CityList.Province) obj;
-            provincesList = province.getResult().get(0);
-            for (CityList.Province.Result result : provincesList) {
-                names.add(result.getName());
+        CityRepo.queryProvinces(new DataSuccessListenter() {
+            @Override
+            public void onDataSuccess(Object obj) {
+                CityList.Province province = (CityList.Province) obj;
+                provincesList = province.getResult().get(0);
+                for (CityList.Province.Result result : provincesList) {
+                    names.add(result.getName());
+                }
+                level = 1;
+                updateUI();
             }
-            level = 1;
-            updateUI();
+
+            @Override
+            public void onError(String error) {
+
+            }
         });
     }
 
@@ -90,6 +98,11 @@ public class ChooseCityDialog extends PopupDialog {
                 }
                 level = 2;
                 updateUI();
+            }
+
+            @Override
+            public void onError(String error) {
+
             }
         });
     }

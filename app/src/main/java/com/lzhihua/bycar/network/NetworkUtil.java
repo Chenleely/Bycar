@@ -19,22 +19,25 @@ import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 //实际发起网络请求的地方
 public class NetworkUtil implements IHttpRequest {
     private OkHttpClient client;
-    private Context mContext;
+    private static Context mContext;
     private static Handler mHandler = new Handler();
     private static int cacheSize = 10 * 1024 * 1024;//10 MB
     private static final int NETWORK_SUCCESS = 1;//请求成功
     private static final int NETWORK_FALIED = 2;//请求失败
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    @Override
-    public void init(Context context) {
-        this.mContext = context.getApplicationContext();
+
+    public static void init(Context context) {
+        mContext = context.getApplicationContext();
         mHandler = getmHandler();
     }
 
@@ -57,6 +60,7 @@ public class NetworkUtil implements IHttpRequest {
 
     @Override
     public void doGet(String url, Map<String, String> params, NetworkRepo.OkhttpOption okhttpOption, NetWorkListener listener) {
+        url = NetworkRepo.Base_url + url;
         url = NetworkRepo.appendUri(url, params);
         Request.Builder builder = new Request.Builder().url(url).tag(okhttpOption == null ? "" : okhttpOption.getTag());
         builder = configHeaders(builder, okhttpOption);
@@ -83,14 +87,37 @@ public class NetworkUtil implements IHttpRequest {
 
     @Override
     public void doPost(String url, Map<String, String> params, NetworkRepo.OkhttpOption okhttpOption, NetWorkListener listener) {
+        url = NetworkRepo.Base_url + url;
         url = NetworkRepo.appendUri(url, params);
         FormBody.Builder builder = new FormBody.Builder();
         builder = configPostParams(builder, params);
         FormBody body = builder.build();
-        Request.Builder requestBuilder = new Request.Builder().url(url).post(body).tag(okhttpOption);
+        Request.Builder requestBuilder = new Request.Builder().url(url).post(body).tag(okhttpOption == null ? "" : okhttpOption);
         requestBuilder = configHeaders(requestBuilder, okhttpOption);
         Request request = requestBuilder.build();
 
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                handleError(e, listener);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                handlerResult(response, listener);
+            }
+        });
+    }
+
+    //上传json
+    @Override
+    public void doPost(String url, String json, NetWorkListener listener) {
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        url = NetworkRepo.Base_url + url;
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -181,6 +208,7 @@ public class NetworkUtil implements IHttpRequest {
         client = new OkHttpClient.Builder()
                 .readTimeout(10000, TimeUnit.MILLISECONDS)
                 .connectTimeout(10000, TimeUnit.MILLISECONDS)
+                .addInterceptor(new TokenIncerptor(mContext))
                 .build();
     }
 
