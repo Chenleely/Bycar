@@ -68,7 +68,7 @@ public class CarBean {
 
         public static class CarListSubData implements Serializable {
 
-            private String id;
+            private int id;
             private String name;
             private String version;
             private double price;
@@ -77,11 +77,11 @@ public class CarBean {
             public CarListSubData() {
             }
 
-            public void setId(String id) {
+            public void setId(int id) {
                 this.id = id;
             }
 
-            public String getId() {
+            public int getId() {
                 return id;
             }
 
@@ -308,21 +308,21 @@ public class CarBean {
      * 创建试驾行程
      * */
     public static class CreateTrycar {
-        private String carId;
+        private int carId;
         private String address;
         private String phone;
 
-        public CreateTrycar(String carId, String address, String phone) {
+        public CreateTrycar(int carId, String address, String phone) {
             this.carId = carId;
             this.address = address;
             this.phone = phone;
         }
 
-        public String getCarId() {
+        public int getCarId() {
             return carId;
         }
 
-        public void setCarId(String carId) {
+        public void setCarId(int carId) {
             this.carId = carId;
         }
 

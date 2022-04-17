@@ -21,6 +21,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class CityRepo {
+    private static final OkHttpClient client=new OkHttpClient();
     private static final String key = "V4BBZ-EZDLX-5IY4T-7LCOK-RJJ35-SBF5U";
     private static final String tag = "city_repo";
     private static final String provinceApi = "https://apis.map.qq.com/ws/district/v1/list";
@@ -41,7 +42,6 @@ public class CityRepo {
 //                Log.e(tag, errorMsg);
 //            }
 //        })
-        final OkHttpClient client=new OkHttpClient();
         String url = provinceApi;
         StringBuilder builder=new StringBuilder();
         builder.append(url);

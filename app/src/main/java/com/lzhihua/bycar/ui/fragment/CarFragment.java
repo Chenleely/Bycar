@@ -23,13 +23,11 @@ import com.lzhihua.bycar.util.AnimationTools;
 
 public class CarFragment extends Fragment{
     private CarFragmentBinding carFragmentBinding;
-    private BaseActivity mActivity;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         carFragmentBinding=CarFragmentBinding.inflate(inflater,container,false);
-        mActivity.setTransparentStatusBar();
         carFragmentBinding.carFragScrollview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
@@ -86,9 +84,7 @@ public class CarFragment extends Fragment{
         return carFragmentBinding.getRoot();
     }
 
-    public void setmActivity(BaseActivity mActivity) {
-        this.mActivity = mActivity;
-    }
+
     private void startActivity(Class target){
         Intent intent=new Intent(getContext(),target);
         startActivity(intent);

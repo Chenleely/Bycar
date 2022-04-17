@@ -1,5 +1,6 @@
 package com.lzhihua.bycar.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,12 +14,20 @@ import androidx.fragment.app.Fragment;
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.MineFragmentBinding;
 import com.lzhihua.bycar.ui.ImpairOrderActivity;
+import com.lzhihua.bycar.ui.MainActivity;
+import com.lzhihua.bycar.ui.ManagerActivity;
 import com.lzhihua.bycar.ui.NoticeActivity;
 import com.lzhihua.bycar.ui.OrderListActivity;
 import com.lzhihua.bycar.ui.dialog.LoginDialog;
 
 public class MineFragment extends Fragment implements LoginDialog.DialogListener{
     private MineFragmentBinding mineFragmentBinding;
+    private MainActivity mAcitivty;
+
+    public void setmAcitivty(MainActivity mAcitivty) {
+        this.mAcitivty = mAcitivty;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +52,7 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
         });
         mineFragmentBinding.mineContent.mineContentScore.setOnClickListener(view -> {
             Intent intent=new Intent(getContext(), NoticeActivity.class);
-            intent.putExtra("page_type",0);
+            intent.putExtra("page_type",1);
             startActivity(intent);
         });
         mineFragmentBinding.mineContent.mineContentAbout.setOnClickListener(view -> {
@@ -54,6 +63,12 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
         mineFragmentBinding.mineContent.mineContentImpair.setOnClickListener(view -> {
             Intent intent=new Intent(getContext(), ImpairOrderActivity.class);
             startActivity(intent);
+        });
+        mineFragmentBinding.mineTitle.switchBtn.setOnClickListener(view->{
+            Intent intent=new Intent(getContext(), ManagerActivity.class);
+            startActivity(intent);
+            BaseActivity.logout(getContext());
+            mAcitivty.finish();
         });
         return mineFragmentBinding.getRoot();
     }
@@ -68,7 +83,7 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
 
 //    登录状态
     @Override
-    public void onDismiss(boolean isSuccess) {
+    public void onDismiss(boolean isSuccess,int type) {
         updateUI();
     }
     private void updateUI(){

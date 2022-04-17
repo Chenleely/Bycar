@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setWhiteStatusBar();
         mainBinding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         fragmentManager=getSupportFragmentManager();
@@ -75,24 +74,31 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
                     currentIndex=2;
                     mainBinding.mainBottom.bottomCarIv.setImageDrawable(resources.getDrawable(R.drawable.ic_car_select));
                     CarFragment carFragment=new CarFragment();
-                    carFragment.setmActivity(MainActivity.this);
                     replaceFragment(carFragment);
                     break;
                 case 3:
                     currentIndex=3;
                     mainBinding.mainBottom.bottomImpairIv.setImageDrawable(resources.getDrawable(R.drawable.ic_impair_select));
                     ImpairFragment impairFragment=new ImpairFragment();
-                    impairFragment.setMainActivity(this);
                     replaceFragment(impairFragment);
                     break;
                 case 4:
                     currentIndex=4;
                     mainBinding.mainBottom.bottomMineIv.setImageDrawable(resources.getDrawable(R.drawable.ic_mine_select));
-                    replaceFragment(new MineFragment());
+                    MineFragment mineFragment= new MineFragment();
+                    mineFragment.setmAcitivty(this);
+                    replaceFragment(mineFragment);
                     break;
             }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setTransparentStatusBar();
+    }
+
     private void replaceFragment(Fragment fragment){
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.replace(R.id.main_container,fragment).commit();
@@ -119,7 +125,7 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
 
 
     @Override
-    public void onDismiss(boolean isSuccess) {
+    public void onDismiss(boolean isSuccess,int type) {
 
     }
 }

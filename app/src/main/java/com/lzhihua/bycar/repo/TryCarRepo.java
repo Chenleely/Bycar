@@ -31,7 +31,7 @@ public class TryCarRepo {
     }
 
 //    创建试驾行程
-    public static void createTryCar(String carId,String address,String phone,final DataSuccessListenter listenter){
+    public static void createTryCar(int carId,String address,String phone,final DataSuccessListenter listenter){
         CarBean.CreateTrycar createTrycar=new CarBean.CreateTrycar(carId,address,phone);
         NetworkUtil.getInstance().doPost(Create_try_car, JSON.toJSONString(createTrycar), new NetworkUtil.NetWorkListener() {
             @Override

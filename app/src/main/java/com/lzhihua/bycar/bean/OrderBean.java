@@ -166,26 +166,26 @@ public class OrderBean {
      * 创建订单
      * */
     public static class CreateOrder {
-        private String carId;
-        private String adress;
+        private int carId;
+        private String address;
 
         public CreateOrder() {
         }
 
-        public void setCarId(String carId) {
+        public void setCarId(int carId) {
             this.carId = carId;
         }
 
-        public String getCarId() {
+        public int getCarId() {
             return carId;
         }
 
-        public void setAdress(String adress) {
-            this.adress = adress;
+        public void setAddress(String adress) {
+            this.address = adress;
         }
 
-        public String getAdress() {
-            return adress;
+        public String getAddress() {
+            return address;
         }
 
     }

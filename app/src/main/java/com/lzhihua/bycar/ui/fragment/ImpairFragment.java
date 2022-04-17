@@ -18,12 +18,11 @@ import com.lzhihua.bycar.ui.MainActivity;
 
 public class ImpairFragment extends Fragment {
     private ImpairFragmentBinding impairFragmentBinding;
-    private MainActivity mainActivity;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         impairFragmentBinding=ImpairFragmentBinding.inflate(inflater);
-        mainActivity.setTransparentStatusBar();
         impairFragmentBinding.impairFragCaringCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,9 +44,6 @@ public class ImpairFragment extends Fragment {
         return impairFragmentBinding.getRoot();
     }
 
-    public void setMainActivity(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
     private void startActivity(Class target){
         Intent intent=new Intent(getContext(),target);
         startActivity(intent);

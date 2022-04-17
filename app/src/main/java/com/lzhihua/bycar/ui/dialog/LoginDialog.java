@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -27,6 +28,8 @@ import com.lzhihua.bycar.commonui.CommonDialog;
 import com.lzhihua.bycar.commonui.PopupDialog;
 import com.lzhihua.bycar.network.DataSuccessListenter;
 import com.lzhihua.bycar.repo.LoginRepo;
+import com.lzhihua.bycar.ui.MainActivity;
+import com.lzhihua.bycar.ui.ManagerActivity;
 import com.lzhihua.bycar.util.SharedPrefTools;
 
 public class LoginDialog extends PopupDialog {
@@ -40,6 +43,8 @@ public class LoginDialog extends PopupDialog {
     //    忘记密码
     private ViewStub forgetStub;
     private View forgetView;
+
+    private int type=-1;
 
     private DialogListener listener;
 
@@ -147,7 +152,7 @@ public class LoginDialog extends PopupDialog {
             @Override
             public void onDataSuccess(Object obj) {
                 LoginBean.LoginResponse loginResponse = (LoginBean.LoginResponse) obj;
-                if (loginResponse != null && loginResponse.getStatus().equals("success")) {
+                if (loginResponse != null && loginResponse.getStatus().equals("success") && loginResponse.getData().getType()==1) {
                     SharedPrefTools.put(mDialog.getContext(), "bycar_token", loginResponse.getData().getToken());
                     if(isRemember){
                         SharedPrefTools.put(context,"user_id",name);
@@ -155,12 +160,18 @@ public class LoginDialog extends PopupDialog {
                     }
                     SharedPrefTools.put(context,"is_remember",isRemember);
                     SharedPrefTools.put(context,"is_login",true);
+
                     showToast("登录成功");
                     mDialog.dismiss();
                     if (listener!=null){
-                        listener.onDismiss(true);
+                        listener.onDismiss(true,loginResponse.getData().getType());
                     }
-                } else {
+                } else if(loginResponse != null && loginResponse.getStatus().equals("success") && loginResponse.getData().getType()==0){
+                    Intent intent=new Intent(context, ManagerActivity.class);
+                    intent.putExtra("is_login_manager",true);
+                    context.startActivity(intent);
+                    ((MainActivity) context).finish();
+                }else {
                     showToast("登录失败，稍后重试");
                 }
             }
@@ -198,7 +209,7 @@ public class LoginDialog extends PopupDialog {
 
     @Override
     public void dismiss() {
-        listener.onDismiss(true);
+        listener.onDismiss(true,type);
     }
 
     private void showToast(String msg) {
@@ -206,6 +217,6 @@ public class LoginDialog extends PopupDialog {
     }
 
     public interface DialogListener {
-        void onDismiss(boolean isSuccess);
+        void onDismiss(boolean isSuccess,int type);
     }
 }

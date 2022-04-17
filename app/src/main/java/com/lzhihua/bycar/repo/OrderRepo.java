@@ -34,11 +34,12 @@ public class OrderRepo {
     }
 
     //创建订单
-    public static void createOrder(String id,String address,final DataSuccessListenter listenter){
+    public static void createOrder(int id,String address,final DataSuccessListenter listenter){
         OrderBean.CreateOrder order=new OrderBean.CreateOrder();
-        order.setAdress(address);
+        order.setAddress(address);
         order.setCarId(id);
-        NetworkUtil.getInstance().doPost(Create_Order, JSON.toJSONString(order), new NetworkUtil.NetWorkListener() {
+        String json=JSON.toJSONString(order);
+        NetworkUtil.getInstance().doPost(Create_Order, json, new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
                 CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);

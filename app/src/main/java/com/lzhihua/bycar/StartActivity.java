@@ -5,8 +5,10 @@ import android.os.Bundle;
 
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.ui.MainActivity;
+import com.lzhihua.bycar.ui.ManagerActivity;
+import com.lzhihua.bycar.ui.dialog.LoginDialog;
 
-public class StartActivity extends BaseActivity {
+public class StartActivity extends BaseActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

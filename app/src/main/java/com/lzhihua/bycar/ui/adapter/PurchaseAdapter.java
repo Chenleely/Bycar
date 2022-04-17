@@ -19,6 +19,7 @@ import com.lzhihua.bycar.bean.CarBean;
 import com.lzhihua.bycar.ui.CarDetailActivity;
 import com.lzhihua.bycar.ui.OrderDetailActivity;
 import com.lzhihua.bycar.ui.presenter.UIShowListener;
+import com.lzhihua.bycar.util.UITools;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter {
              intent.putExtra("car_bean",(CarBean.CarList.CarListSubData)view.getTag());
              context.startActivity(intent);
         });
+        ((PurchaseCarHolder) holder).carImg.setImageDrawable(UITools.getDrawable(context.getResources(),car.getName()));
     }
 
     @Override

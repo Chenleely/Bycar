@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +61,7 @@ public class OrderListAdapter extends RecyclerView.Adapter {
          String[] status=new String[]{"待支付","待处理","处理中","已完成"};
         ((OrderListHolder) holder).statusTv.setText(result.getStatus()==-1? "已取消" : status[result.getStatus()]);
         ((OrderListHolder) holder).msgBtn.setTag(result);
-
+        ((OrderListHolder) holder).imageView.setImageDrawable(UITools.getDrawable(context.getResources(),result.getCar().getName()));
         if (result.getStatus() == -1 || result.getStatus() == 3) {
             ((OrderListHolder) holder).msgBtn.setVisibility(View.GONE);
         } else if (result.getStatus() == 0) {
@@ -121,7 +122,7 @@ public class OrderListAdapter extends RecyclerView.Adapter {
         private LinearLayout msgBtn;
         private TextView msgTv;
         private TextView addressTv;
-
+        private ImageView imageView;
         public OrderListHolder(@NonNull View itemView) {
             super(itemView);
             nameTv = itemView.findViewById(R.id.order_list_car_name);
@@ -132,6 +133,7 @@ public class OrderListAdapter extends RecyclerView.Adapter {
             msgBtn = itemView.findViewById(R.id.order_list_car_btn);
             msgTv = itemView.findViewById(R.id.order_list_car_btn_tv);
             addressTv = itemView.findViewById(R.id.order_list_car_address);
+            imageView=itemView.findViewById(R.id.order_list_car_img);
         }
 
     }

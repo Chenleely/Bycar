@@ -54,7 +54,7 @@ public class PopupDialog {
     }
     public void dismiss(){
         mDialog.dismiss();
-        if(data!=null){
+        if(data!=null && listener!=null){
             listener.onDismiss(data);
         }
     }

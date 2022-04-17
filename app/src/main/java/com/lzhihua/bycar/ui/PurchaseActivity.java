@@ -3,6 +3,7 @@ package com.lzhihua.bycar.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.lzhihua.bycar.R;
@@ -30,7 +31,12 @@ public class PurchaseActivity extends BaseActivity {
         activityPurchaseBinding.purchaseTopBar.titleBack.setOnClickListener(view -> {
             finish();
         });
-        activityPurchaseBinding.purchaseTopBar.topTv.setText("选购车辆");
+//        activityPurchaseBinding.purchaseTopBar.topTv.setText("选购车辆");
+        activityPurchaseBinding.purchaseTopBar.topTv1.setText("我的订单");
+        activityPurchaseBinding.purchaseTopBar.topTv1.setOnClickListener(view -> {
+            Intent intent=new Intent(PurchaseActivity.this,OrderListActivity.class);
+            startActivity(intent);
+        });
         setContentView(activityPurchaseBinding.getRoot());
         purchaseAdapter=new PurchaseAdapter(this);
         activityPurchaseBinding.purchaseRecyclerView.setAdapter(purchaseAdapter);

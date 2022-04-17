@@ -36,12 +36,6 @@ public class BaseActivity extends AppCompatActivity {
         MyViewModelFactory factory = new MyViewModelFactory();
         progressDialog = new ProgressDialog(this);
         mViewModel = new ViewModelProvider(this, factory).get(BaseViewModel.class);
-        mViewModel.getScreenState().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-//                  TODO:屏幕关闭时进行反馈
-            }
-        });
         mViewModel.getIsLogin().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
