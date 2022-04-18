@@ -131,6 +131,26 @@ public class NetworkUtil implements IHttpRequest {
         });
     }
 
+    //上传json,带header
+    @Override
+    public void doPost(String url, String json, NetWorkListener listener, Map<String, String> headers) {
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        url = NetworkRepo.Base_url + url;
+        Request.Builder builder=new Request.Builder().url(url).post(requestBody);
+        builder=configPostParams(builder,headers);
+        client.newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                handleError(e, listener);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                handlerResult(response, listener);
+            }
+        });
+    }
+
     //post添加参数
     private FormBody.Builder configPostParams(FormBody.Builder builder, Map<String, String> params) {
         if (params != null) {
@@ -139,6 +159,18 @@ public class NetworkUtil implements IHttpRequest {
                 String key = entry.getKey();
                 String val = entry.getValue();
                 builder.add(key, val);
+            }
+        }
+        return builder;
+    }
+    //添加Header
+    private Request.Builder configPostParams(Request.Builder builder, Map<String, String> params) {
+        if (params != null) {
+            Set<Map.Entry<String, String>> entrySet = params.entrySet();
+            for (Map.Entry<String, String> entry : entrySet) {
+                String key = entry.getKey();
+                String val = entry.getValue();
+                builder.addHeader(key, val);
             }
         }
         return builder;

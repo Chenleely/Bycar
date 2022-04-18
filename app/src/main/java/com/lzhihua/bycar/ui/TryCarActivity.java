@@ -1,5 +1,6 @@
 package com.lzhihua.bycar.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import com.lzhihua.bycar.util.UITools;
 
 public class TryCarActivity extends BaseActivity implements PopupDialog.onDismissListener {
     private ActivityTryCarBinding activityTryCarBinding;
-    private int successTime=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,8 @@ public class TryCarActivity extends BaseActivity implements PopupDialog.onDismis
         activityTryCarBinding.tryCarTop.topTv.setLayoutParams(lp);
         activityTryCarBinding.tryCarTop.topTv.setText("试驾行程");
         activityTryCarBinding.tryCarTop.topTv.setOnClickListener(view -> {
-
+            Intent intent=new Intent(TryCarActivity.this,TryCarListActivity.class);
+            startActivity(intent);
         });
         activityTryCarBinding.tryCarChooseCar.setOnClickListener(view -> {
             ChooseCarDialog chooseCarDialog=new ChooseCarDialog(TryCarActivity.this);
@@ -44,28 +45,23 @@ public class TryCarActivity extends BaseActivity implements PopupDialog.onDismis
             chooseCityDialog.show();
         });
         activityTryCarBinding.tryCarChooseToTry.setOnClickListener(view -> {
-            if (successTime>=1){
-                UITools.showToast(TryCarActivity.this,"短时间内请勿重复预约");
-            }else{
-                String address=activityTryCarBinding.tryCarChooseCityName.getText().toString().trim();
-                String phone=activityTryCarBinding.tryCarChoosePhoneName.getText().toString().trim();
-                CarBean.CarList.CarListSubData carBean= (CarBean.CarList.CarListSubData) view.getTag();
-                if(!TextUtils.isEmpty(address) && !TextUtils.isEmpty(phone) && carBean!=null){
-                    progressDialog.show();
-                    TryCarRepo.createTryCar(carBean.getId(), address, phone, new DataSuccessListenter() {
-                        @Override
-                        public void onDataSuccess(Object obj) {
-                            UITools.showToast(TryCarActivity.this,"创建成功");
-                            progressDialog.dismiss();
-                            successTime++;
-                        }
+            String address=activityTryCarBinding.tryCarChooseCityName.getText().toString().trim();
+            String phone=activityTryCarBinding.tryCarChoosePhoneName.getText().toString().trim();
+            CarBean.CarList.CarListSubData carBean= (CarBean.CarList.CarListSubData) view.getTag();
+            if(!TextUtils.isEmpty(address) && !TextUtils.isEmpty(phone) && carBean!=null){
+                progressDialog.show();
+                TryCarRepo.createTryCar(carBean.getId(), address, phone, new DataSuccessListenter() {
+                    @Override
+                    public void onDataSuccess(Object obj) {
+                        UITools.showToast(TryCarActivity.this,"创建成功");
+                        progressDialog.dismiss();
+                    }
 
-                        @Override
-                        public void onError(String error) {
-                            progressDialog.dismiss();
-                        }
-                    });
-                }
+                    @Override
+                    public void onError(String error) {
+                        progressDialog.dismiss();
+                    }
+                });
             }
         });
     }

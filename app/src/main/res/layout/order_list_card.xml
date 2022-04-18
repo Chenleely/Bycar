@@ -23,27 +23,28 @@
         android:layout_width="160dp"
         android:layout_height="120dp"
         android:src="@drawable/ec6"/>
+
     <TextView
         android:id="@+id/order_list_car_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="处理中"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:text="处理中"
         android:textColor="@color/tips_color"
         android:textSize="16dp" />
+
     <TextView
         android:id="@+id/order_list_car_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/order_list_car_img"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="购入价格：383,000"
-        android:layout_below="@id/order_list_car_img"
         android:textColor="@color/main_color"
-        android:textSize="15dp"
-        />
+        android:textSize="15dp" />
     <TextView
         android:id="@+id/order_list_car_address"
         android:layout_width="wrap_content"
@@ -79,8 +80,7 @@
         android:background="@drawable/round_bg_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="150dp"
         android:layout_alignParentRight="true">
         <TextView
             android:layout_width="wrap_content"

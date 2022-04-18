@@ -67,7 +67,7 @@ public class TryCarRepo {
     }
 
 //    取消试驾行程
-    public static void cancelTrycar(String id,final DataSuccessListenter listenter){
+    public static void cancelTrycar(int id,final DataSuccessListenter listenter){
         CarBean.IdCommon idCommon=new CarBean.IdCommon();
         idCommon.setId(id);
         NetworkUtil.getInstance().doPost(Cancel_try_car, JSON.toJSONString(idCommon), new NetworkUtil.NetWorkListener() {

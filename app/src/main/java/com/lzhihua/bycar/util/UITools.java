@@ -6,11 +6,16 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.Toast;
 
 import com.lzhihua.bycar.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UITools {
     private  static float density = Resources.getSystem().getDisplayMetrics().density;
@@ -68,5 +73,21 @@ public class UITools {
                 throw new IllegalStateException("Unexpected value: " + id);
         }
         return drawable;
+    }
+
+    public static List<Integer> getWidthAndHeight(Context context){
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        float density = dm.density;
+        int width = dm.widthPixels;         // 屏幕宽度（像素）
+        int height = dm.heightPixels;       // 屏幕高度（像素）
+//        int screenWidth = (int) (width / density);
+//        int screenHeight = (int) (height / density);// 屏幕高度(dp)
+
+        List<Integer> res=new ArrayList<>();
+        res.add(width);
+        res.add(height);
+        return res;
     }
 }
