@@ -24,6 +24,7 @@ import com.lzhihua.bycar.ui.CareActivity;
 import com.lzhihua.bycar.ui.ImpairActivity;
 import com.lzhihua.bycar.ui.ImpairOrderActivity;
 import com.lzhihua.bycar.ui.MainActivity;
+import com.lzhihua.bycar.util.CommonTools;
 import com.lzhihua.bycar.util.UITools;
 import com.lzhihua.bycar.util.VibratorUtil;
 
@@ -46,10 +47,12 @@ public class ImpairFragment extends Fragment {
         vibrator = (Vibrator)getContext().getSystemService(getContext().VIBRATOR_SERVICE);
 
         impairFragmentBinding.impairFragBtn.setOnClickListener(view -> {
+            Bundle bundle=new Bundle();
+            bundle.putInt("impair_type",curIndex);
             if (curIndex==0){
-                startActivity(ImpairActivity.class);
+                CommonTools.startActivity(getContext(),ImpairActivity.class,"impair_bundle",bundle);
             }else if (curIndex==1){
-                startActivity(CareActivity.class);
+                CommonTools.startActivity(getContext(),ImpairActivity.class,"impair_bundle",bundle);
             }
         });
         int height= (int) (getContext().getResources().getDisplayMetrics().heightPixels*0.7);
@@ -67,15 +70,12 @@ public class ImpairFragment extends Fragment {
             View view=LayoutInflater.from(getContext()).inflate(R.layout.order_list_card,impairFragmentBinding.impairFragHistoryContainer,true);
         }
         impairFragmentBinding.impairFragHistoryMore.setOnClickListener(view->{
-            startActivity(ImpairOrderActivity.class);
+            CommonTools.startActivity(getContext(),ImpairOrderActivity.class);
         });
         return impairFragmentBinding.getRoot();
     }
 
-    private void startActivity(Class target) {
-        Intent intent = new Intent(getContext(), target);
-        startActivity(intent);
-    }
+
 
     private boolean touch(View view,MotionEvent event){
         if (view.getId() != R.id.impair_frag_btn ) {

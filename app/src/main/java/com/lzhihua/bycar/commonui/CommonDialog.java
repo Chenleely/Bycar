@@ -4,7 +4,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +17,16 @@ import com.lzhihua.bycar.R;
 
 
 public class CommonDialog extends Dialog {
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     /**
      * 显示的图片
      */
@@ -59,6 +72,11 @@ public class CommonDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_dialog);
+        Window window=this.getWindow();
+        WindowManager.LayoutParams params=this.getWindow().getAttributes();
+        Display display= window.getWindowManager().getDefaultDisplay();
+        params.width=(int) (display.getWidth()*0.9);
+        window.setAttributes(params);
         //按空白处不能取消动画
         setCanceledOnTouchOutside(false);
         //初始化界面控件
@@ -78,7 +96,7 @@ public class CommonDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if ( onClickBottomListener!= null) {
-                    onClickBottomListener.onPositiveClick();
+                    onClickBottomListener.onPositiveClick(type);
                 }
             }
         });
@@ -87,7 +105,7 @@ public class CommonDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if ( onClickBottomListener!= null) {
-                    onClickBottomListener.onNegtiveClick();
+                    onClickBottomListener.onNegtiveClick(type);
                 }
             }
         });
@@ -167,11 +185,11 @@ public class CommonDialog extends Dialog {
         /**
          * 点击确定按钮事件
          */
-        public void onPositiveClick();
+        public void onPositiveClick(String type);
         /**
          * 点击取消按钮事件
          */
-        public void onNegtiveClick();
+        public void onNegtiveClick(String type);
     }
 
     public String getMessage() {

@@ -133,11 +133,12 @@ public class NetworkUtil implements IHttpRequest {
 
     //上传json,带header
     @Override
-    public void doPost(String url, String json, NetWorkListener listener, Map<String, String> headers) {
+    public void doPost(String url, String json, NetWorkListener listener, Map<String, String> params) {
         RequestBody requestBody = RequestBody.create(JSON, json);
         url = NetworkRepo.Base_url + url;
+        url = NetworkRepo.appendUri(url, params);
         Request.Builder builder=new Request.Builder().url(url).post(requestBody);
-        builder=configPostParams(builder,headers);
+//        builder=configPostParams(builder,headers);
         client.newCall(builder.build()).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {

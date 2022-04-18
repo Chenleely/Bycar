@@ -1,5 +1,9 @@
 package com.lzhihua.bycar.util;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,5 +29,15 @@ public class CommonTools {
         buffer.append("日");
         buffer.append(" "+calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE));
         return  buffer.toString();
+    }
+
+    public static void startActivity(Context context,Class target) {
+        Intent intent = new Intent(context, target);
+        context.startActivity(intent);
+    }
+    public static void startActivity(Context context,Class target, String key, Bundle data) {
+        Intent intent = new Intent(context, target);
+        intent.putExtra(key,data);
+        context.startActivity(intent);
     }
 }

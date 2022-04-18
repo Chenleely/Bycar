@@ -10,16 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ImpairRepo {
-    private static final String GetSelfCar="/car/self_list";
-    private static final String SaleOrderList="/after_sale_order/list";
-    private static final String CreateAfterOrder="/after_sale_order/create";
-    private static final String CancelAfterOrder="/after_sale_order/cancel";
+    private static final String GetSelfCar = "/car/self_list";
+    private static final String SaleOrderList = "/after_sale_order/list";
+    private static final String CreateAfterOrder = "/after_sale_order/create";
+    private static final String CancelAfterOrder = "/after_sale_order/cancel";
 
-    public static void getSelfCarList(final DataSuccessListenter listenter){
+    public static void getSelfCarList(final DataSuccessListenter listenter) {
         NetworkUtil.getInstance().doGet(GetSelfCar, new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                AfterOrderBean.SelfCar selfCar= JSON.parseObject(response, AfterOrderBean.SelfCar.class);
+                AfterOrderBean.SelfCar selfCar = JSON.parseObject(response, AfterOrderBean.SelfCar.class);
                 listenter.onDataSuccess(selfCar);
             }
 
@@ -30,16 +30,16 @@ public class ImpairRepo {
         });
     }
 
-//  type :0代表维修单，1代表保养单
-    public static void getAfterOrders(int limit,int offset,int type,final DataSuccessListenter listenter){
-        Map<String,String> params=new HashMap<>();
-        params.put("Limit",limit+"");
-        params.put("Offset",offset+"");
-        params.put("Type",type+"");
+    //  type :0代表维修单，1代表保养单
+    public static void getAfterOrders(int limit, int offset, int type, final DataSuccessListenter listenter) {
+        Map<String, String> params = new HashMap<>();
+        params.put("Limit", limit + "");
+        params.put("Offset", offset + "");
+        params.put("Type", type + "");
         NetworkUtil.getInstance().doGet(SaleOrderList, params, new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                AfterOrderBean.AfterOrder afterOrder=JSON.parseObject(response, AfterOrderBean.AfterOrder.class);
+                AfterOrderBean.AfterOrder afterOrder = JSON.parseObject(response, AfterOrderBean.AfterOrder.class);
                 listenter.onDataSuccess(afterOrder);
             }
 
@@ -50,16 +50,16 @@ public class ImpairRepo {
         });
     }
 
-    public static void createAfterOrder(int type,int id,String address,final DataSuccessListenter listenter){
-        Map<String,String> params=new HashMap<>();
-        params.put("Type",type+"");
-        AfterOrderBean.CreateAfterOrder order=new AfterOrderBean.CreateAfterOrder();
+    public static void createAfterOrder(int type, int id, String address, final DataSuccessListenter listenter) {
+        Map<String, String> params = new HashMap<>();
+        params.put("Type", type + "");
+        AfterOrderBean.CreateAfterOrder order = new AfterOrderBean.CreateAfterOrder();
         order.setSaleOrderId(id);
         order.setAddress(address);
         NetworkUtil.getInstance().doPost(CreateAfterOrder, JSON.toJSONString(order), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                AfterOrderBean.CreateAfterOrderRes orderRes=JSON.parseObject(response, AfterOrderBean.CreateAfterOrderRes.class);
+                AfterOrderBean.CreateAfterOrderRes orderRes = JSON.parseObject(response, AfterOrderBean.CreateAfterOrderRes.class);
                 listenter.onDataSuccess(orderRes);
             }
 
@@ -67,16 +67,16 @@ public class ImpairRepo {
             public void onFailed(String errorMsg) {
                 listenter.onError(errorMsg);
             }
-        },params);
+        }, params);
     }
 
-    public void cancelAfterOrder(int id,final DataSuccessListenter listenter){
-        AfterOrderBean.CancelOrder order=new AfterOrderBean.CancelOrder();
+    public void cancelAfterOrder(int id, final DataSuccessListenter listenter) {
+        AfterOrderBean.CancelOrder order = new AfterOrderBean.CancelOrder();
         order.setAfterSaleOrderId(id);
         NetworkUtil.getInstance().doPost(CancelAfterOrder, JSON.toJSONString(order), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                CarBean.CommonResponse response1=JSON.parseObject(response, CarBean.CommonResponse.class);
+                CarBean.CommonResponse response1 = JSON.parseObject(response, CarBean.CommonResponse.class);
                 listenter.onDataSuccess(response1);
             }
 

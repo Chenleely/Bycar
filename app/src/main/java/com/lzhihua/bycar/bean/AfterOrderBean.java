@@ -1,9 +1,10 @@
 package com.lzhihua.bycar.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AfterOrderBean {
-    public static class SelfCar {
+    public static class SelfCar implements Serializable {
         public SelfCar(){}
         private String status;
         private Data data;
@@ -32,7 +33,7 @@ public class AfterOrderBean {
             }
         }
 
-        public static class Result {
+        public static class Result implements Serializable {
             public Result(){}
             private int id;
             private String name;

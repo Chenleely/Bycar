@@ -41,6 +41,7 @@ public class OrderDetailActivity extends BaseActivity implements PopupDialog.onD
             @Override
             public void onClick(View view) {
                 ChooseCityDialog chooseCityDialog=new ChooseCityDialog(OrderDetailActivity.this);
+                chooseCityDialog.setDialogType("chooseCityDialog");
                 chooseCityDialog.setListener(OrderDetailActivity.this);
                 chooseCityDialog.show();
             }
@@ -99,11 +100,13 @@ public class OrderDetailActivity extends BaseActivity implements PopupDialog.onD
     }
 
     @Override
-    public void onDismiss(Bundle data) {
-        String city=data.getString("city","");
-        if(!TextUtils.isEmpty(city)){
-            TextView cityTv=orderDetailBinding.createOrderCity.findViewById(R.id.order_car_city_name);
-            cityTv.setText(city);
+    public void onDismiss(Bundle data,String type) {
+        if (type.equals("chooseCityDialog")){
+            String city=data.getString("city","");
+            if(!TextUtils.isEmpty(city)){
+                TextView cityTv=orderDetailBinding.createOrderCity.findViewById(R.id.order_car_city_name);
+                cityTv.setText(city);
+            }
         }
     }
 }

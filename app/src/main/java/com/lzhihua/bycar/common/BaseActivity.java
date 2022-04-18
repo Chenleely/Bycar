@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -19,10 +22,12 @@ import com.lzhihua.bycar.network.NetworkUtil;
 import com.lzhihua.bycar.ui.dialog.LoginDialog;
 import com.lzhihua.bycar.ui.presenter.UIShowListener;
 import com.lzhihua.bycar.util.SharedPrefTools;
+import com.lzhihua.bycar.util.WeakRefHanlder;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements Handler.Callback {
     //    protected NetworkUtil networkUtil=NetworkUtil.getInstance();
     public static boolean isLogin = false;
+    protected WeakRefHanlder hanlder;
     private BaseViewModel mViewModel;
     protected ProgressDialog progressDialog;
 
@@ -35,6 +40,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         MyViewModelFactory factory = new MyViewModelFactory();
         progressDialog = new ProgressDialog(this);
+        hanlder=new WeakRefHanlder(this,getMainLooper());
         mViewModel = new ViewModelProvider(this, factory).get(BaseViewModel.class);
         mViewModel.getIsLogin().observe(this, new Observer<Boolean>() {
             @Override
@@ -113,12 +119,17 @@ public class BaseActivity extends AppCompatActivity {
         return login;
     }
 
-    public static void login(Context context){
+    public static void login(Context context) {
         SharedPrefTools.get(context, "is_login", true);
     }
+
     public static void logout(Context context) {
         SharedPrefTools.put(context, "is_login", false);
     }
 
 
+    @Override
+    public boolean handleMessage(@NonNull Message message) {
+        return true;
+    }
 }

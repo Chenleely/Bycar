@@ -36,11 +36,13 @@ public class TryCarActivity extends BaseActivity implements PopupDialog.onDismis
         });
         activityTryCarBinding.tryCarChooseCar.setOnClickListener(view -> {
             ChooseCarDialog chooseCarDialog=new ChooseCarDialog(TryCarActivity.this);
+            chooseCarDialog.setDialogType("chooseCarDialog");
             chooseCarDialog.setListener(this);
             chooseCarDialog.show();
         });
         activityTryCarBinding.tryCarChooseCity.setOnClickListener(view -> {
             ChooseCityDialog chooseCityDialog=new ChooseCityDialog(TryCarActivity.this);
+            chooseCityDialog.setDialogType("chooseCarDialog");
             chooseCityDialog.setListener(this);
             chooseCityDialog.show();
         });
@@ -67,15 +69,17 @@ public class TryCarActivity extends BaseActivity implements PopupDialog.onDismis
     }
 
     @Override
-    public void onDismiss(Bundle data) {
-        String city=data.getString("city","");
-        if(!TextUtils.isEmpty(city)){
-            activityTryCarBinding.tryCarChooseCityName.setText(city);
-        }
-        CarBean.CarList.CarListSubData carListSubData= (CarBean.CarList.CarListSubData) data.getSerializable("car_bean");
-        if (carListSubData!=null){
-            activityTryCarBinding.tryCarChooseCarName.setText(carListSubData.getName());
-            activityTryCarBinding.tryCarChooseToTry.setTag(carListSubData);
+    public void onDismiss(Bundle data,String type) {
+        if (type.equals("chooseCarDialog")){
+            String city=data.getString("city","");
+            if(!TextUtils.isEmpty(city)){
+                activityTryCarBinding.tryCarChooseCityName.setText(city);
+            }
+            CarBean.CarList.CarListSubData carListSubData= (CarBean.CarList.CarListSubData) data.getSerializable("car_bean");
+            if (carListSubData!=null){
+                activityTryCarBinding.tryCarChooseCarName.setText(carListSubData.getName());
+                activityTryCarBinding.tryCarChooseToTry.setTag(carListSubData);
+            }
         }
     }
 }

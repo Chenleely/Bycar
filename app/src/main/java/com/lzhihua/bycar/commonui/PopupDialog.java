@@ -19,6 +19,16 @@ public class PopupDialog {
     protected View mView;
     protected onDismissListener listener;
     protected Bundle data;
+    private String dialogType;
+
+    public void setDialogType(String dialogType) {
+        this.dialogType = dialogType;
+    }
+
+    public String getDialogType() {
+        return dialogType;
+    }
+
     public void setData(Bundle data) {
         this.data = data;
     }
@@ -55,10 +65,10 @@ public class PopupDialog {
     public void dismiss(){
         mDialog.dismiss();
         if(data!=null && listener!=null){
-            listener.onDismiss(data);
+            listener.onDismiss(data,getDialogType());
         }
     }
     public interface onDismissListener{
-        void onDismiss(Bundle data);
+        void onDismiss(Bundle data,String type);
     }
 }
