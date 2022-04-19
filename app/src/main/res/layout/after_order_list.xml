@@ -10,9 +10,32 @@
     tools:context=".ui.ImpairOrderActivity">
     <include layout="@layout/common_top_bar"
         android:id="@+id/after_order_list_top"/>
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:id="@+id/after_order_list_recycler"/>
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/after_order_list_spinner"
+            android:layout_width="wrap_content"
+            android:layout_toLeftOf="@id/after_order_list_find"
+            android:entries="@array/after_order_list"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/after_order_list_find"
+            android:layout_width="25dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/fiter_and_find"/>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/after_order_list_container"/>
+    </ScrollView>
+
 </LinearLayout>

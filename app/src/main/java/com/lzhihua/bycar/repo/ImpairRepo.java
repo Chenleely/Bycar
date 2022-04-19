@@ -40,7 +40,7 @@ public class ImpairRepo {
             @Override
             public void onSuccess(String response) {
                 AfterOrderBean.AfterOrder afterOrder = JSON.parseObject(response, AfterOrderBean.AfterOrder.class);
-                listenter.onDataSuccess(afterOrder);
+                listenter.onDataSuccess(afterOrder.getData().getList());
             }
 
             @Override
@@ -70,7 +70,7 @@ public class ImpairRepo {
         }, params);
     }
 
-    public void cancelAfterOrder(int id, final DataSuccessListenter listenter) {
+    public static void cancelAfterOrder(int id, final DataSuccessListenter listenter) {
         AfterOrderBean.CancelOrder order = new AfterOrderBean.CancelOrder();
         order.setAfterSaleOrderId(id);
         NetworkUtil.getInstance().doPost(CancelAfterOrder, JSON.toJSONString(order), new NetworkUtil.NetWorkListener() {
