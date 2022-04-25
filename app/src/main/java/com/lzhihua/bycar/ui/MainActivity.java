@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
         onBottomClick(1);
     }
 
-
     private void initBottom(){
         mainBinding.mainBottom.bottomMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +96,7 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
     protected void onResume() {
         super.onResume();
         setTransparentStatusBar();
+        checkLogin(this);
     }
 
     private void replaceFragment(Fragment fragment){

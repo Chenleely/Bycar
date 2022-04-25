@@ -69,6 +69,7 @@ public class ImpairActivity extends BaseActivity implements PopupDialog.onDismis
         activityImpairBinding.impairActChooseCar.setOnClickListener(view -> {
             ChooseMycarDialog chooseMycarDialog = new ChooseMycarDialog(ImpairActivity.this);
             chooseMycarDialog.setDialogType("chooseCarDialog");
+            chooseMycarDialog.setTitle("选择车辆");
             chooseMycarDialog.setListener(this);
             chooseMycarDialog.show();
         });

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.bean.CarBean;
 import com.lzhihua.bycar.common.BaseActivity;
+import com.lzhihua.bycar.commonui.CommonDialog;
 import com.lzhihua.bycar.databinding.ActivityPurchaseBinding;
 import com.lzhihua.bycar.network.DataSuccessListenter;
 import com.lzhihua.bycar.network.NetworkUtil;
@@ -23,10 +24,12 @@ public class PurchaseActivity extends BaseActivity {
     private PurchaseAdapter purchaseAdapter;
     private List<CarBean.CarList.CarListSubData> carList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTransparentStatusBar();
+
         activityPurchaseBinding = ActivityPurchaseBinding.inflate(getLayoutInflater());
         activityPurchaseBinding.purchaseTopBar.titleBack.setOnClickListener(view -> {
             finish();

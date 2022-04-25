@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bycar">
         <activity
+            android:name=".ui.ManageCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ManageAfterActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.TryCarListActivity"
             android:exported="false" />
         <activity

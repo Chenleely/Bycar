@@ -61,10 +61,6 @@ public class BaseActivity extends AppCompatActivity implements Handler.Callback 
 
     @Override
     protected void onResume() {
-        if (!checkLogin(this)) {
-            LoginDialog loginDialog = new LoginDialog(this, 0);
-            loginDialog.show();
-        }
         super.onResume();
     }
 
@@ -116,6 +112,10 @@ public class BaseActivity extends AppCompatActivity implements Handler.Callback 
 
     public static boolean checkLogin(Context context) {
         boolean login = (boolean) SharedPrefTools.get(context, "is_login", false);
+        if (!login) {
+            LoginDialog loginDialog = new LoginDialog(context, 0);
+            loginDialog.show();
+        }
         return login;
     }
 
@@ -131,5 +131,16 @@ public class BaseActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     public boolean handleMessage(@NonNull Message message) {
         return true;
+    }
+    protected void showProgress(){
+        if (!progressDialog.isShowing()){
+            progressDialog.show();
+        }
+    }
+
+    protected void dismissProgress(){
+        if (progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 }

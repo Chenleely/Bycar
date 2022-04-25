@@ -70,7 +70,8 @@ public class UITools {
                 drawable=resources.getDrawable(R.drawable.et7);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + id);
+                drawable=resources.getDrawable(R.drawable.et7);
+                break;
         }
         return drawable;
     }

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 
 import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.bean.ManagerBean;
+import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.ActivityManageOrderBinding;
 import com.lzhihua.bycar.network.DataSuccessListenter;
 import com.lzhihua.bycar.repo.ManagerRepo;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ManageOrderActivity extends AppCompatActivity implements UIShowListener {
+public class ManageOrderActivity extends BaseActivity implements UIShowListener {
     private ActivityManageOrderBinding activityManageOrderBinding;
     private ProgressDialog progressDialog;
     private ManagerOrderAdapter managerOrderAdapter;
@@ -39,6 +40,7 @@ public class ManageOrderActivity extends AppCompatActivity implements UIShowList
         offset = new AtomicInteger(1);
         progressDialog = new ProgressDialog(this);
         setContentView(activityManageOrderBinding.getRoot());
+        setWhiteStatusBar();
         managerOrderAdapter = new ManagerOrderAdapter(this);
         managerOrderAdapter.setListener(this);
         SpinString = new ArrayList<>();

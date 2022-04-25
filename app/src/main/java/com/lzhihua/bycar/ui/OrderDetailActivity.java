@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.bean.CarBean;
 import com.lzhihua.bycar.common.BaseActivity;
+import com.lzhihua.bycar.commonui.CommonDialog;
 import com.lzhihua.bycar.commonui.PopupDialog;
+import com.lzhihua.bycar.databinding.CommonDialogListBinding;
 import com.lzhihua.bycar.databinding.OrderDetailBinding;
 import com.lzhihua.bycar.network.DataSuccessListenter;
 import com.lzhihua.bycar.repo.OrderRepo;
@@ -20,21 +25,37 @@ import com.lzhihua.bycar.util.UITools;
 
 public class OrderDetailActivity extends BaseActivity implements PopupDialog.onDismissListener {
 //    订单生成
+    private CommonDialog cancelDialog;
     private CarBean.CarList.CarListSubData carBean;
     private OrderDetailBinding orderDetailBinding;
+    private PopupDialog chooseIDTypeDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setWhiteStatusBar();
         orderDetailBinding=OrderDetailBinding.inflate(getLayoutInflater());
         setContentView(orderDetailBinding.getRoot());
+        cancelDialog=new CommonDialog(this);
+        cancelDialog.setTitle("确认要退出吗？");
+        cancelDialog.setMessage("现在退出将不能享受购车优惠哦...");
+        cancelDialog.setOnClickBottomListener(new CommonDialog.OnClickBottomListener() {
+            @Override
+            public void onPositiveClick(String type) {
+                finish();
+            }
+
+            @Override
+            public void onNegtiveClick(String type) {
+                cancelDialog.dismiss();
+            }
+        });
         carBean= (CarBean.CarList.CarListSubData) getIntent().getSerializableExtra("car_bean");
         if (carBean==null){
             finish();
         }
         orderDetailBinding.createOrderTop.topTv.setText("创建订单");
         orderDetailBinding.createOrderName.setText("车型：NIO "+carBean.getName());
-        orderDetailBinding.createOrderPrice.setText("总价：￥ "+carBean.getPrice()*10000);
+        orderDetailBinding.createOrderPriceTotalTv.setText("总价：￥ "+carBean.getPrice()*10000);
         orderDetailBinding.createOrderVersion.setText("版本："+carBean.getVersion());
         orderDetailBinding.createOrderImg.setImageDrawable(UITools.getDrawable(getResources(),carBean.getName()));
         orderDetailBinding.createOrderCity.setOnClickListener(new View.OnClickListener() {
@@ -47,10 +68,10 @@ public class OrderDetailActivity extends BaseActivity implements PopupDialog.onD
             }
         });
         orderDetailBinding.createOrderCancel.setOnClickListener(view -> {
-            finish();
+            cancelDialog.show();
         });
         orderDetailBinding.createOrderTop.titleBack.setOnClickListener(view -> {
-            finish();
+            cancelDialog.show();
         });
         orderDetailBinding.createOrderCommit.setOnClickListener(view -> {
             TextView cityTv=orderDetailBinding.createOrderCity.findViewById(R.id.order_car_city_name);
@@ -97,6 +118,34 @@ public class OrderDetailActivity extends BaseActivity implements PopupDialog.onD
                 }
             });
         });
+        orderDetailBinding.createOrderOwnerIdType.setOnClickListener(view -> {
+            chooseIDTypeDialog=new PopupDialog(OrderDetailActivity.this,R.layout.common_dialog_list,1);
+            chooseIDTypeDialog.setDialogType("chooseIDTypeDialog");
+            chooseIDTypeDialog.setListener(this);
+            LinearLayout container=(LinearLayout) chooseIDTypeDialog.getmView().findViewById(R.id.common_dialog_listcontainer);
+            TextView topTv=(TextView) chooseIDTypeDialog.getmView().findViewById(R.id.common_dialog_list_toptv);
+            topTv.setText("选择证件类型");
+            String[] types=new String[]{"居民身份证","护照","香港身份证","军官证","台胞证","澳门居民身份证"};
+            container.removeAllViews();
+            for (String s:types){
+                TextView textView= (TextView) LayoutInflater.from(OrderDetailActivity.this).inflate(R.layout.commmon_text_view_1,null,false);
+                LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                lp.bottomMargin=UITools.dip2px(20);
+                lp.topMargin=UITools.dip2px(20);
+                lp.leftMargin=UITools.dip2px(20);
+                lp.rightMargin=UITools.dip2px(20);
+                textView.setLayoutParams(lp);
+                textView.setText(s);
+                container.addView(textView);
+                textView.setOnClickListener(view1 -> {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("choose_type",s);
+                    chooseIDTypeDialog.setData(bundle);
+                    chooseIDTypeDialog.dismiss();
+                });
+            }
+            chooseIDTypeDialog.show();
+        });
     }
 
     @Override
@@ -106,6 +155,11 @@ public class OrderDetailActivity extends BaseActivity implements PopupDialog.onD
             if(!TextUtils.isEmpty(city)){
                 TextView cityTv=orderDetailBinding.createOrderCity.findViewById(R.id.order_car_city_name);
                 cityTv.setText(city);
+            }
+        }else if (type.equals("chooseIDTypeDialog")){
+            String idType=data.getString("choose_type","");
+            if(!TextUtils.isEmpty(type)){
+                orderDetailBinding.createOrderOwnerIdTypeTv.setText(idType);
             }
         }
     }

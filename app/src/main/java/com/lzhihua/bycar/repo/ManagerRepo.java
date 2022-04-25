@@ -6,16 +6,24 @@ import com.lzhihua.bycar.bean.ManagerBean;
 import com.lzhihua.bycar.network.DataSuccessListenter;
 import com.lzhihua.bycar.network.NetworkUtil;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
+
 public class ManagerRepo {
-    private static final String GetAllOrders = "/sale_order/list_all";
-    private static final String DealWithOrder = "/sale_order/process";
-    private static final String FinishOrder = "/sale_order/finish";
-    private static final String AddCar = "/car/create";
-    private static final String DeleteCar = "/car/delete";
-    private static final String GetTrycarList = "/test_drive/list_all";
+    private static final String GetAllOrders = "/sale_order/list_all";//所有订单列表
+    private static final String DealWithOrder = "/sale_order/process";//处理订单
+    private static final String FinishOrder = "/sale_order/finish";//完成订单
+    private static final String AddCar = "/car/create";//创建车辆
+    private static final String DeleteCar = "/car/delete";//删除车辆
+    private static final String UploadCarImg = "/car/img_upload";//上传车辆图片
+    private static final String GetTrycarList = "/test_drive/list_all";//获取试驾列表
+    private static final String GetALlAfterOrders = "/after_sale_order/list_all";//获取售后列表
+    private static final String DealAfterOrder = "/after_sale_order/process";//处理售后订单
+    private static final String CountAfterOrder = "/after_sale_order/quote";//售后订单报价
+
 
     public static void GetOrderList(int limit, int offset, final DataSuccessListenter listenter) {
         Map<String, String> params = new HashMap<>();
@@ -35,13 +43,13 @@ public class ManagerRepo {
         });
     }
 
-    public static void processOrder(int orderId, final DataSuccessListenter listenter){
-        ManagerBean.OrderIdBean orderIdBean=new ManagerBean.OrderIdBean();
+    public static void processOrder(int orderId, final DataSuccessListenter listenter) {
+        ManagerBean.OrderIdBean orderIdBean = new ManagerBean.OrderIdBean();
         orderIdBean.setOrderId(orderId);
         NetworkUtil.getInstance().doPost(DealWithOrder, JSON.toJSONString(orderIdBean), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
+                CarBean.CommonResponse commonResponse = JSON.parseObject(response, CarBean.CommonResponse.class);
                 listenter.onDataSuccess(commonResponse);
             }
 
@@ -52,13 +60,13 @@ public class ManagerRepo {
         });
     }
 
-    public static void finishOrder(int orderId, final DataSuccessListenter listenter){
-        ManagerBean.OrderIdBean orderIdBean=new ManagerBean.OrderIdBean();
+    public static void finishOrder(int orderId, final DataSuccessListenter listenter) {
+        ManagerBean.OrderIdBean orderIdBean = new ManagerBean.OrderIdBean();
         orderIdBean.setOrderId(orderId);
         NetworkUtil.getInstance().doPost(FinishOrder, JSON.toJSONString(orderIdBean), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
+                CarBean.CommonResponse commonResponse = JSON.parseObject(response, CarBean.CommonResponse.class);
                 listenter.onDataSuccess(commonResponse);
             }
 
@@ -69,8 +77,8 @@ public class ManagerRepo {
         });
     }
 
-    public static void addCar(String name,String version,double price,String des,final DataSuccessListenter listenter){
-        ManagerBean.AddCar addCar=new ManagerBean.AddCar();
+    public static void addCar(String name, String version, String price, String des, final DataSuccessListenter listenter) {
+        ManagerBean.AddCar addCar = new ManagerBean.AddCar();
         addCar.setName(name);
         addCar.setPrice(price);
         addCar.setVersion(version);
@@ -78,8 +86,8 @@ public class ManagerRepo {
         NetworkUtil.getInstance().doPost(AddCar, JSON.toJSONString(addCar), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
-                listenter.onDataSuccess(response);
+                CarBean.CommonResponse commonResponse = JSON.parseObject(response, CarBean.CommonResponse.class);
+                listenter.onDataSuccess(commonResponse);
             }
 
             @Override
@@ -89,14 +97,14 @@ public class ManagerRepo {
         });
     }
 
-    public static void deleteCar(int carId,final DataSuccessListenter listenter){
-        ManagerBean.DeleteCar deleteCar=new ManagerBean.DeleteCar();
+    public static void deleteCar(int carId, final DataSuccessListenter listenter) {
+        ManagerBean.DeleteCar deleteCar = new ManagerBean.DeleteCar();
         deleteCar.setCarId(carId);
         NetworkUtil.getInstance().doPost(DeleteCar, JSON.toJSONString(deleteCar), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
-                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
-                listenter.onDataSuccess(response);
+                CarBean.CommonResponse commonResponse = JSON.parseObject(response, CarBean.CommonResponse.class);
+                listenter.onDataSuccess(commonResponse);
             }
 
             @Override
@@ -115,6 +123,24 @@ public class ManagerRepo {
             public void onSuccess(String response) {
                 ManagerBean.TrycarList saleList = JSON.parseObject(response, ManagerBean.TrycarList.class);
                 listenter.onDataSuccess(saleList);
+            }
+
+            @Override
+            public void onFailed(String errorMsg) {
+                listenter.onError(errorMsg);
+            }
+        });
+    }
+
+    public static void UploadCarImg(File file,int id,final DataSuccessListenter listenter){
+        Map<String,String> params=new HashMap<>();
+        params.put("Id",id+"");
+        MediaType mediaType = MediaType.parse("image/jpeg");
+        NetworkUtil.getInstance().doPost(UploadCarImg, params, new File(""), mediaType, new NetworkUtil.NetWorkListener() {
+            @Override
+            public void onSuccess(String response) {
+                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
+                listenter.onDataSuccess(commonResponse);
             }
 
             @Override

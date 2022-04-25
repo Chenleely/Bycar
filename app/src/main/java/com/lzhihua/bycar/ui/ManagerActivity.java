@@ -43,6 +43,10 @@ public class ManagerActivity extends AppCompatActivity implements LoginDialog.Di
             Intent intent=new Intent(ManagerActivity.this,ManageOrderActivity.class);
             startActivity(intent);
         });
+        managerBinding.managerMainMoney.setOnClickListener(view -> {
+            Intent intent=new Intent(ManagerActivity.this,ManageCarActivity.class);
+            startActivity(intent);
+        });
     }
     private void setTransparentStatusBar() {
         //5.0及以上

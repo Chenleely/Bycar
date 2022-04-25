@@ -22,6 +22,12 @@ import java.util.List;
 public class ChooseMycarDialog extends PopupDialog {
     private ChooseCarDialogBinding chooseCarDialogBinding;
     private List<AfterOrderBean.SelfCar.Result> carList;
+    private String title;
+
+    public void setTitle(String title) {
+        this.title = title;
+        chooseCarDialogBinding.chooseCarTop.topTv.setText(title);
+    }
 
     public ChooseMycarDialog(Context context) {
         this(context, R.layout.choose_car_dialog, 0);
@@ -42,7 +48,7 @@ public class ChooseMycarDialog extends PopupDialog {
 
             }
         });
-        chooseCarDialogBinding.chooseCarTop.topTv.setText("选择车辆");
+
         chooseCarDialogBinding.chooseCarTop.titleBack.setOnClickListener(view -> {
             dismiss();
         });

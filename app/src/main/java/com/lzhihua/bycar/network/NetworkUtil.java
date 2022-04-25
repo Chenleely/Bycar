@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.lzhihua.bycar.R;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +21,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -140,6 +142,33 @@ public class NetworkUtil implements IHttpRequest {
         Request.Builder builder=new Request.Builder().url(url).post(requestBody);
 //        builder=configPostParams(builder,headers);
         client.newCall(builder.build()).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                handleError(e, listener);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                handlerResult(response, listener);
+            }
+        });
+    }
+
+//    上传文件
+    @Override
+    public void doPost(String url,  Map<String,String> params,File file, MediaType type, NetWorkListener listener) {
+        url=NetworkRepo.Base_url+url;
+        url=NetworkRepo.appendUri(url,params);
+        RequestBody fileBody=RequestBody.create(type,file);
+        RequestBody body=new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("carImg", file.getName(),fileBody)
+                .build();
+        Request request=new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 handleError(e, listener);

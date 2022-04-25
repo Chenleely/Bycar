@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.lzhihua.bycar.R;
 import com.lzhihua.bycar.common.BaseActivity;
 import com.lzhihua.bycar.databinding.MineFragmentBinding;
 import com.lzhihua.bycar.ui.ImpairOrderActivity;
@@ -18,6 +20,7 @@ import com.lzhihua.bycar.ui.MainActivity;
 import com.lzhihua.bycar.ui.ManagerActivity;
 import com.lzhihua.bycar.ui.NoticeActivity;
 import com.lzhihua.bycar.ui.OrderListActivity;
+import com.lzhihua.bycar.ui.dialog.ChooseMycarDialog;
 import com.lzhihua.bycar.ui.dialog.LoginDialog;
 
 public class MineFragment extends Fragment implements LoginDialog.DialogListener{
@@ -42,6 +45,11 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
         mineFragmentBinding.mineTitle.mineTitleLoginMsg.setOnClickListener(view -> showLogin());
         mineFragmentBinding.mineTitle.mineTitleAvatar.setOnClickListener(view -> showLogin());
         //content部分
+        mineFragmentBinding.mineContent.mineContentMycar.setOnClickListener(view -> {
+            ChooseMycarDialog chooseMycarDialog=new ChooseMycarDialog(getContext());
+            chooseMycarDialog.setTitle("我的车辆");
+            chooseMycarDialog.show();
+        });
         mineFragmentBinding.mineContent.mineContentBill.setOnClickListener(view -> {
             Intent intent=new Intent(getContext(), OrderListActivity.class);
             startActivity(intent);

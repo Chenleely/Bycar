@@ -29,6 +29,10 @@ public class PopupDialog {
         return dialogType;
     }
 
+    public View getmView() {
+        return mView;
+    }
+
     public void setData(Bundle data) {
         this.data = data;
     }

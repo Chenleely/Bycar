@@ -186,7 +186,7 @@ public class ManagerBean {
 
         private String name;
         private String version;
-        private double price;
+        private String price;
         private String description;
 
         public void setName(String name) {
@@ -205,11 +205,11 @@ public class ManagerBean {
             return version;
         }
 
-        public void setPrice(double price) {
+        public void setPrice(String price) {
             this.price = price;
         }
 
-        public double getPrice() {
+        public String getPrice() {
             return price;
         }
 

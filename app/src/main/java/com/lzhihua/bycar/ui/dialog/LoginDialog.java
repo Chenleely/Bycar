@@ -167,6 +167,10 @@ public class LoginDialog extends PopupDialog {
                         listener.onDismiss(true,loginResponse.getData().getType());
                     }
                 } else if(loginResponse != null && loginResponse.getStatus().equals("success") && loginResponse.getData().getType()==0){
+                    if(isRemember){
+                        SharedPrefTools.put(context,"user_id",name);
+                        SharedPrefTools.put(context,"user_pass",password);
+                    }
                     Intent intent=new Intent(context, ManagerActivity.class);
                     intent.putExtra("is_login_manager",true);
                     context.startActivity(intent);

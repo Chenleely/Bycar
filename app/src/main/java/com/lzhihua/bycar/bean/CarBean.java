@@ -73,6 +73,7 @@ public class CarBean {
             private String version;
             private double price;
             private String description;
+            private String imgUrl;
 
             public CarListSubData() {
             }
@@ -115,6 +116,14 @@ public class CarBean {
 
             public String getDescription() {
                 return description;
+            }
+
+            public String getImgUrl() {
+                return imgUrl;
+            }
+
+            public void setImgUrl(String imgUrl) {
+                this.imgUrl = imgUrl;
             }
         }
     }
