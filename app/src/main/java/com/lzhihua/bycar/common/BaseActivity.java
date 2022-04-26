@@ -42,15 +42,15 @@ public class BaseActivity extends AppCompatActivity implements Handler.Callback 
         progressDialog = new ProgressDialog(this);
         hanlder=new WeakRefHanlder(this,getMainLooper());
         mViewModel = new ViewModelProvider(this, factory).get(BaseViewModel.class);
-        mViewModel.getIsLogin().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean == false) {
-                    Intent intent = new Intent(getApplicationContext(), LoginDialog.class);
-                    startActivity(intent);
-                }
-            }
-        });
+//        mViewModel.getIsLogin().observe(this, new Observer<Boolean>() {
+//            @Override
+//            public void onChanged(Boolean aBoolean) {
+//                if (aBoolean == false) {
+//                    Intent intent = new Intent(getApplicationContext(), LoginDialog.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
         NetworkUtil.init(this);
     }
 

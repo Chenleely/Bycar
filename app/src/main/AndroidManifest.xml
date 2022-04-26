@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bycar">
         <activity
+            android:name=".MomentDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ManageCarActivity"
             android:exported="false" />
         <activity
@@ -44,6 +47,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.TryCarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ReleaseMessageactivity"
             android:exported="false" />
         <activity
             android:name=".ui.PurchaseActivity"

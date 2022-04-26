@@ -387,4 +387,265 @@ public class ManagerBean {
             }
         }
     }
+
+    public static class AfterOrderPrice {
+        private int afterSaleOrderId;
+        private double price;
+
+        public AfterOrderPrice() {
+        }
+
+        public void setAfterSaleOrderId(int afterSaleOrderId) {
+            this.afterSaleOrderId = afterSaleOrderId;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public int getAfterSaleOrderId() {
+            return afterSaleOrderId;
+        }
+    }
+
+    public static class AfterOrderList {
+        public AfterOrderList() {
+        }
+
+        private String status;
+        private Data data;
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setData(Data data) {
+            this.data = data;
+        }
+
+        public Data getData() {
+            return data;
+        }
+
+        public static class CarResp {
+            public CarResp() {
+            }
+
+            private int id;
+            private String name;
+            private String version;
+            private double price;
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setVersion(String version) {
+                this.version = version;
+            }
+
+            public String getVersion() {
+                return version;
+            }
+
+            public void setPrice(double price) {
+                this.price = price;
+            }
+
+            public double getPrice() {
+                return price;
+            }
+        }
+
+        public static class Result {
+            public Result() {
+            }
+
+            private int id;
+            private double price;
+            private int status;
+            private String address;
+            private String createTime;
+            private String updateTime;
+            private CarResp carResp;
+            private UserResp userResp;
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setPrice(double price) {
+                this.price = price;
+            }
+
+            public double getPrice() {
+                return price;
+            }
+
+            public void setStatus(int status) {
+                this.status = status;
+            }
+
+            public int getStatus() {
+                return status;
+            }
+
+            public void setAddress(String address) {
+                this.address = address;
+            }
+
+            public String getAddress() {
+                return address;
+            }
+
+            public void setCreateTime(String createTime) {
+                this.createTime = createTime;
+            }
+
+            public String getCreateTime() {
+                return createTime;
+            }
+
+            public void setUpdateTime(String updateTime) {
+                this.updateTime = updateTime;
+            }
+
+            public String getUpdateTime() {
+                return updateTime;
+            }
+
+            public void setCarResp(CarResp carResp) {
+                this.carResp = carResp;
+            }
+
+            public CarResp getCarResp() {
+                return carResp;
+            }
+
+            public void setUserResp(UserResp userResp) {
+                this.userResp = userResp;
+            }
+
+            public UserResp getUserResp() {
+                return userResp;
+            }
+        }
+
+        public static class UserResp {
+            public UserResp() {
+            }
+
+            private int id;
+            private String userId;
+            private String name;
+            private String phone;
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setUserId(String userId) {
+                this.userId = userId;
+            }
+
+            public String getUserId() {
+                return userId;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+        }
+
+        public static class Data {
+            public Data() {
+            }
+
+            private int limit;
+            private int Offset;
+            private List<Result> list;
+
+            public void setLimit(int limit) {
+                this.limit = limit;
+            }
+
+            public int getLimit() {
+                return limit;
+            }
+
+            public void setOffset(int Offset) {
+                this.Offset = Offset;
+            }
+
+            public int getOffset() {
+                return Offset;
+            }
+
+            public void setList(List<Result> list) {
+                this.list = list;
+            }
+
+            public List<Result> getList() {
+                return list;
+            }
+
+        }
+    }
+
+    public static class AfterOrderId {
+        private int afterSaleOrderId;
+
+        public int getAfterSaleOrderId() {
+            return afterSaleOrderId;
+        }
+
+        public void setAfterSaleOrderId(int afterSaleOrderId) {
+            this.afterSaleOrderId = afterSaleOrderId;
+        }
+
+        public AfterOrderId() {
+
+        }
+    }
 }

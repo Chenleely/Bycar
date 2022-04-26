@@ -40,7 +40,7 @@ public class ManageOrderActivity extends BaseActivity implements UIShowListener 
         offset = new AtomicInteger(1);
         progressDialog = new ProgressDialog(this);
         setContentView(activityManageOrderBinding.getRoot());
-        setWhiteStatusBar();
+        setTransparentStatusBar();
         managerOrderAdapter = new ManagerOrderAdapter(this);
         managerOrderAdapter.setListener(this);
         SpinString = new ArrayList<>();

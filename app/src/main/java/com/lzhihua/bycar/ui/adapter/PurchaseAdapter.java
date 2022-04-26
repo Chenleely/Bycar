@@ -60,8 +60,13 @@ public class PurchaseAdapter extends RecyclerView.Adapter {
         ((PurchaseCarHolder) holder).buy.setTag(car);
         ((PurchaseCarHolder) holder).buy.setOnClickListener(view -> {
              Intent intent=new Intent(context, OrderDetailActivity.class);
-             intent.putExtra("car_bean",(CarBean.CarList.CarListSubData)view.getTag());
+             intent.putExtra("car_bean",car);
              context.startActivity(intent);
+        });
+        ((PurchaseCarHolder) holder).root.setOnClickListener(view -> {
+            Intent intent=new Intent(context, OrderDetailActivity.class);
+            intent.putExtra("car_bean",car);
+            context.startActivity(intent);
         });
         ((PurchaseCarHolder) holder).carImg.setImageDrawable(UITools.getDrawable(context.getResources(),car.getName()));
     }

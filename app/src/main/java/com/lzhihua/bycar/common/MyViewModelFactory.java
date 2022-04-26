@@ -14,7 +14,7 @@ public class MyViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(BaseViewModel.class)){
+        if (BaseViewModel.class.isAssignableFrom(modelClass)){
             return (T) new BaseViewModel(data);
         }
         throw new RuntimeException("unknown class: "+modelClass.getName());

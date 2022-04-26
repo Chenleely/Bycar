@@ -9,7 +9,7 @@
     android:elevation="3dp"
     android:padding="10dp"
     android:id="@+id/purchase_card_root"
-    android:background="@drawable/round_bg">
+    android:background="@drawable/purchase_item">
 
     <TextView
         android:id="@+id/purchase_card_name"
@@ -49,11 +49,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/purchase_card_name"
         android:layout_marginLeft="15dp"
-        android:text="电动智能旗舰轿车"
         android:layout_marginTop="10dp"
+        android:text="电动智能旗舰轿车"
         android:textColor="@color/main_color"
-        android:textSize="16dp" />
+        android:textSize="12dp" />
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/purchase_card_buy"
         android:background="@drawable/round_bg_1"
         android:layout_width="wrap_content"

@@ -92,6 +92,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -102,11 +103,27 @@
             android:textSize="16dp"
             android:text="图片"/>
         <ImageView
-            android:layout_width="140dp"
+            android:id="@+id/add_car_dialog_car_img"
+            android:layout_width="180dp"
             android:layout_marginLeft="10dp"
-            android:scaleType="fitXY"
-            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:layout_height="120dp"
             android:src="@drawable/img_ic"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/add_car_dialog_car_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="删除"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:background="@color/red"
+            android:textColor="@color/white"/>
     </LinearLayout>
     <TextView
         android:id="@+id/add_car_dialog_car_submit"

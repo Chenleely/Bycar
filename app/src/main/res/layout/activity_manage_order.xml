@@ -9,15 +9,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.ManageOrderActivity">
     <RelativeLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:id="@+id/manager_order_topbar"
         android:layout_height="25dp">
         <ImageView
             android:id="@+id/manage_order_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/ic_back"
             android:layout_marginLeft="20dp"/>
         <Spinner

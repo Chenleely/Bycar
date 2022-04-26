@@ -13,16 +13,20 @@ import java.util.Map;
 import okhttp3.MediaType;
 
 public class ManagerRepo {
+//    订单管理
     private static final String GetAllOrders = "/sale_order/list_all";//所有订单列表
     private static final String DealWithOrder = "/sale_order/process";//处理订单
     private static final String FinishOrder = "/sale_order/finish";//完成订单
+//    车辆管理
     private static final String AddCar = "/car/create";//创建车辆
     private static final String DeleteCar = "/car/delete";//删除车辆
     private static final String UploadCarImg = "/car/img_upload";//上传车辆图片
+//    试驾管理
     private static final String GetTrycarList = "/test_drive/list_all";//获取试驾列表
+//    售后管理
     private static final String GetALlAfterOrders = "/after_sale_order/list_all";//获取售后列表
     private static final String DealAfterOrder = "/after_sale_order/process";//处理售后订单
-    private static final String CountAfterOrder = "/after_sale_order/quote";//售后订单报价
+    private static final String AfterOrderPrice = "/after_sale_order/quote";//售后订单报价
 
 
     public static void GetOrderList(int limit, int offset, final DataSuccessListenter listenter) {
@@ -137,6 +141,60 @@ public class ManagerRepo {
         params.put("Id",id+"");
         MediaType mediaType = MediaType.parse("image/jpeg");
         NetworkUtil.getInstance().doPost(UploadCarImg, params, new File(""), mediaType, new NetworkUtil.NetWorkListener() {
+            @Override
+            public void onSuccess(String response) {
+                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
+                listenter.onDataSuccess(commonResponse);
+            }
+
+            @Override
+            public void onFailed(String errorMsg) {
+                listenter.onError(errorMsg);
+            }
+        });
+    }
+
+    public static void  getAfterOrderList(int limit, int offset, int type,final DataSuccessListenter listenter){
+        Map<String, String> params = new HashMap<>();
+        params.put("Limit", limit + "");
+        params.put("Offset", offset + "");
+        params.put("Type", type + "");
+        NetworkUtil.getInstance().doGet(GetALlAfterOrders, params, new NetworkUtil.NetWorkListener() {
+            @Override
+            public void onSuccess(String response) {
+                ManagerBean.AfterOrderList afterOrderList=JSON.parseObject(response, ManagerBean.AfterOrderList.class);
+                listenter.onDataSuccess(afterOrderList);
+            }
+
+            @Override
+            public void onFailed(String errorMsg) {
+                listenter.onError(errorMsg);
+            }
+        });
+    }
+
+    public static void processAfterOrder(int id,final DataSuccessListenter listenter){
+        ManagerBean.AfterOrderId afterOrderId=new ManagerBean.AfterOrderId();
+        afterOrderId.setAfterSaleOrderId(id);
+        NetworkUtil.getInstance().doPost(DealAfterOrder, JSON.toJSONString(afterOrderId), new NetworkUtil.NetWorkListener() {
+            @Override
+            public void onSuccess(String response) {
+                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
+                listenter.onDataSuccess(commonResponse);
+            }
+
+            @Override
+            public void onFailed(String errorMsg) {
+                listenter.onError(errorMsg);
+            }
+        });
+    }
+
+    public static void afterOrderPrice(double price,int id,final DataSuccessListenter listenter){
+        ManagerBean.AfterOrderPrice afterOrderPrice=new ManagerBean.AfterOrderPrice();
+        afterOrderPrice.setPrice(price);
+        afterOrderPrice.setAfterSaleOrderId(id);
+        NetworkUtil.getInstance().doPost(AfterOrderPrice, JSON.toJSONString(afterOrderPrice), new NetworkUtil.NetWorkListener() {
             @Override
             public void onSuccess(String response) {
                 CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);

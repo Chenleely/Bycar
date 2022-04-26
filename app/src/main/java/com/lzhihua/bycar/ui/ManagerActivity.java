@@ -43,6 +43,14 @@ public class ManagerActivity extends AppCompatActivity implements LoginDialog.Di
             Intent intent=new Intent(ManagerActivity.this,ManageOrderActivity.class);
             startActivity(intent);
         });
+        managerBinding.managerMainImpair.setOnClickListener(view -> {
+            Intent intent=new Intent(ManagerActivity.this,ManageAfterActivity.class);
+            startActivity(intent);
+        });
+        managerBinding.managerMainTrycar.setOnClickListener(view -> {
+            Intent intent=new Intent(ManagerActivity.this,ManageTryarActivity.class);
+            startActivity(intent);
+        });
         managerBinding.managerMainMoney.setOnClickListener(view -> {
             Intent intent=new Intent(ManagerActivity.this,ManageCarActivity.class);
             startActivity(intent);
