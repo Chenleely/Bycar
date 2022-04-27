@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.lzhihua.bycar.MineMomentsActivity;
@@ -51,9 +52,11 @@ public class MoreFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
             case PUBLISH_MOMENT:
-                CommunityBean.CreateCommentResp commentResp=(CommunityBean.CreateCommentResp) data.getSerializableExtra("result");
-                if (commentResp.getStatus().equals("success")){
-                    adapter.addMoment(commentResp.getData());
+                if (resultCode==RESULT_OK){
+                    CommunityBean.CreateCommentResp commentResp=(CommunityBean.CreateCommentResp) data.getSerializableExtra("result");
+                    if (commentResp.getStatus().equals("success")){
+                        viewmodel.refreshData();
+                    }
                 }
                 break;
         }
@@ -70,10 +73,16 @@ public class MoreFragment extends Fragment {
         dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.show_bigimg);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        viewmodel.setType(1);
         viewmodel.getMomentLivedata().observe(getViewLifecycleOwner(), new Observer<List<CommunityBean.Moment>>() {
             @Override
             public void onChanged(List<CommunityBean.Moment> moments) {
-                adapter.setMomentList(moments);
+                if (viewmodel.getOffset().get()==1){
+                    adapter.setMomentList(moments);
+                }else if (viewmodel.getOffset().get()>1){
+                    adapter.addMoment(moments);
+                }
+
             }
         });
         viewmodel.getShowBigImg().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -117,6 +126,13 @@ public class MoreFragment extends Fragment {
         binding.momentTopSubmit.setOnClickListener(view -> {
             Intent intent = new Intent(getContext(), ReleaseMessageactivity.class);
             startActivityForResult(intent,PUBLISH_MOMENT);
+        });
+        binding.momentTopRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewmodel.refreshData();
+                binding.momentTopRefresh.setRefreshing(false);
+            }
         });
         binding.momentRecycler.setOnScrollListener(new RecyclerView.OnScrollListener() {
             boolean isSlidingToLast = false;

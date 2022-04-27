@@ -122,6 +122,7 @@ public class LoginDialog extends PopupDialog {
         CheckBox showPass = loginView.findViewById(R.id.login_show_pass);
         CheckBox rememberPass = loginView.findViewById(R.id.login_remember_pass);
         rememberPass.setChecked(isRemember);
+        TextView backRegister=(TextView) loginView.findViewById(R.id.back_register);
 
         showPass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -145,6 +146,12 @@ public class LoginDialog extends PopupDialog {
                 }
             }
         });
+
+        backRegister.setOnClickListener(view -> {
+            registerStub.setVisibility(View.GONE);
+            registerView=registerStub.inflate();
+            initRegister();
+        });
     }
 
     private void login(String name, String password, final boolean isRemember) {
@@ -163,6 +170,7 @@ public class LoginDialog extends PopupDialog {
 
                     showToast("登录成功");
                     mDialog.dismiss();
+                    BaseActivity.login(context);
                     if (listener!=null){
                         listener.onDismiss(true,loginResponse.getData().getType());
                     }
@@ -213,6 +221,7 @@ public class LoginDialog extends PopupDialog {
 
     @Override
     public void dismiss() {
+        mDialog.dismiss();
         listener.onDismiss(true,type);
     }
 

@@ -5,10 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StartActivity">
-    <ImageView
-        android:layout_width="match_parent"
-        android:src="@drawable/login_background_ic"
-        android:scaleType="centerCrop"
-        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

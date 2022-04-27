@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity implements LoginDialog.DialogList
         fragmentManager=getSupportFragmentManager();
         resources=getResources();
         initBottom();
-        onBottomClick(1);
+        onBottomClick(2);
     }
 
     private void initBottom(){

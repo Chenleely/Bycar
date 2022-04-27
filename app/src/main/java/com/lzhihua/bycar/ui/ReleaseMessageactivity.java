@@ -67,7 +67,10 @@ public class ReleaseMessageactivity extends BaseActivity implements ReleaseAdapt
         recyclerView.setAdapter(adapter);
         submit.setOnClickListener(view -> {
             String text=editText.getText().toString().trim();
-            if (!TextUtils.isEmpty(text)){
+            if (imagePaths.size()==0){
+                UITools.showToast(ReleaseMessageactivity.this,"选择一张图片吧.");
+            }
+            if (!TextUtils.isEmpty(text) && imagePaths.size()>0){
                 showProgress();
                 CommunityRepo.createMoment(text, adapter.getmList(), new DataSuccessListenter() {
                     @Override

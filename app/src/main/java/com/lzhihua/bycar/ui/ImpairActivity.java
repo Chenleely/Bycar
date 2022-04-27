@@ -123,7 +123,9 @@ public class ImpairActivity extends BaseActivity implements PopupDialog.onDismis
             int[] res = (int[]) data.get("date_res");
             boolean selected = (boolean) data.get("date_is_elect");
             if (res != null && selected == true) {
-                activityImpairBinding.impairActChooseDateTv.setText(res[0] + "年" + res[1] + "月" + res[2] + "日");
+                int month=res[1];
+                month+=1;
+                activityImpairBinding.impairActChooseDateTv.setText(res[0] + "年" +month + "月" + res[2] + "日");
             }
         } else if (type.equals("chooseCityDialog")) {
             String city = data.getString("city", "");

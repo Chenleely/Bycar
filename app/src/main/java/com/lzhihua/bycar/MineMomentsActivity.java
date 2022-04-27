@@ -37,6 +37,7 @@ public class MineMomentsActivity extends BaseActivity {
         adapter.setMorefragViewmodel(morefragViewmodel);
         adapter.setType(1);
         morefragViewmodel.setAdapter(adapter);
+        morefragViewmodel.setType(0);
         morefragViewmodel.getMomentLivedata().observe(this, new Observer<List<CommunityBean.Moment>>() {
             @Override
             public void onChanged(List<CommunityBean.Moment> moments) {

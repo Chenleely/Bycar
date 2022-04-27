@@ -45,14 +45,14 @@ public class MomentItemAdapter extends RecyclerView.Adapter<MomentItemAdapter.Mo
         notifyDataSetChanged();
     }
     public void setMomentList(List<CommunityBean.Moment> momentList) {
-        for (CommunityBean.Moment moment : momentList) {
-            this.momentList.add(moment);
-        }
+        this.momentList=momentList;
         notifyDataSetChanged();
     }
 
-    public void addMoment(CommunityBean.Moment moment) {
-        this.momentList.add(moment);
+    public void addMoment(List<CommunityBean.Moment> moments) {
+        for (CommunityBean.Moment moment:moments){
+            this.momentList.add(moment);
+        }
         notifyDataSetChanged();
     }
 
@@ -71,7 +71,7 @@ public class MomentItemAdapter extends RecyclerView.Adapter<MomentItemAdapter.Mo
     public void onBindViewHolder(@NonNull MomentItemHolder holder, int position) {
         CommunityBean.Moment moment = momentList.get(position);
         holder.content.setText(moment.getContext());
-        holder.time.setText(CommonTools.formatUtcTime(moment.getCreateTime()));
+        holder.time.setText(CommonTools.formatUtcTime(moment.getCreateTime()==null? "" : moment.getCreateTime()));
         holder.name.setText(moment.getUser().getName());
         String[] paths = moment.getImgUrl().split(";");
         holder.multiImageView.setOnItemClickListener(this);

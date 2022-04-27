@@ -21,9 +21,19 @@ public class MorefragViewmodel extends ViewModel {
     private MutableLiveData<String> showBigImg=new MutableLiveData<>("");
     private MutableLiveData<Integer> updateLike=new MutableLiveData<>(-1);
     private MomentItemAdapter adapter;
+    private int type=1;//0请求个人，1请求所有人
+
+    public void setType(int type) {
+        this.type = type;
+        queryData();
+    }
 
     public void setAdapter(MomentItemAdapter adapter) {
         this.adapter = adapter;
+    }
+
+    public AtomicInteger getOffset() {
+        return offset;
     }
 
     public void nextPage() {
@@ -55,28 +65,91 @@ public class MorefragViewmodel extends ViewModel {
     private AtomicInteger offset=new AtomicInteger(1);
     public MorefragViewmodel(){
         super();
-        queryData();
+
+    }
+    public void refreshData(){
+        showprogresData.setValue(true);
+        if (type==0){
+            CommunityRepo.getSelfList(offset.get(), 10, new DataSuccessListenter() {
+                @Override
+                public void onDataSuccess(Object obj) {
+                    CommunityBean.SelfMomentList momentList=( CommunityBean.SelfMomentList)obj;
+                    if (momentList!=null &&momentList.getData().getList().size()>0){
+                        momentLivedata.setValue(momentList.getData().getList());
+                        isLastPage.setValue(false);
+                    }else if (momentList!=null &&momentList.getData().getList().size()==0){
+                        isLastPage.setValue(true);
+                    }
+                    showprogresData.setValue(false);
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            });
+        }else if (type==1){
+            CommunityRepo.getMomentList(offset.get(), 10, new DataSuccessListenter() {
+                @Override
+                public void onDataSuccess(Object obj) {
+                    CommunityBean.MomentList momentList=( CommunityBean.MomentList)obj;
+                    if (momentList!=null &&momentList.getData().getList().size()>0){
+                        momentLivedata.setValue(momentList.getData().getList());
+                        isLastPage.setValue(false);
+                    }else if (momentList!=null &&momentList.getData().getList().size()==0){
+                        isLastPage.setValue(true);
+                    }
+                    showprogresData.setValue(false);
+                }
+
+                @Override
+                public void onError(String error) {
+                    showprogresData.setValue(false);
+                }
+            });
+        }
     }
     public void queryData(){
         showprogresData.setValue(true);
-        CommunityRepo.getMomentList(offset.get(), 10, new DataSuccessListenter() {
-            @Override
-            public void onDataSuccess(Object obj) {
-                CommunityBean.MomentList momentList=( CommunityBean.MomentList)obj;
-                if (momentList!=null &&momentList.getData().getList().size()>0){
-                    momentLivedata.setValue(momentList.getData().getList());
-                    isLastPage.setValue(false);
-                }else if (momentList!=null &&momentList.getData().getList().size()==0){
-                    isLastPage.setValue(true);
+        if (type==0){
+            CommunityRepo.getSelfList(offset.get(), 10, new DataSuccessListenter() {
+                @Override
+                public void onDataSuccess(Object obj) {
+                    CommunityBean.SelfMomentList momentList=( CommunityBean.SelfMomentList)obj;
+                    if (momentList!=null &&momentList.getData().getList().size()>0){
+                        momentLivedata.setValue(momentList.getData().getList());
+                        isLastPage.setValue(false);
+                    }else if (momentList!=null &&momentList.getData().getList().size()==0){
+                        isLastPage.setValue(true);
+                    }
+                    showprogresData.setValue(false);
                 }
-                showprogresData.setValue(false);
-            }
 
-            @Override
-            public void onError(String error) {
-                showprogresData.setValue(false);
-            }
-        });
+                @Override
+                public void onError(String error) {
+
+                }
+            });
+        }else if (type==1){
+            CommunityRepo.getMomentList(offset.get(), 10, new DataSuccessListenter() {
+                @Override
+                public void onDataSuccess(Object obj) {
+                    CommunityBean.MomentList momentList=( CommunityBean.MomentList)obj;
+                    if (momentList!=null &&momentList.getData().getList().size()>0){
+                        momentLivedata.setValue(momentList.getData().getList());
+                        isLastPage.setValue(false);
+                    }else if (momentList!=null &&momentList.getData().getList().size()==0){
+                        isLastPage.setValue(true);
+                    }
+                    showprogresData.setValue(false);
+                }
+
+                @Override
+                public void onError(String error) {
+                    showprogresData.setValue(false);
+                }
+            });
+        }
     }
     public void momentLike(int momentId,int postion){
         CommunityRepo.momentLike(momentId, new DataSuccessListenter() {

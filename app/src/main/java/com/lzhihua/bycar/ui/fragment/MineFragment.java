@@ -39,6 +39,7 @@ public class MineFragment extends Fragment implements LoginDialog.DialogListener
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        showLogin();
         mineFragmentBinding=MineFragmentBinding.inflate(inflater,container,false);
         updateUI();
         //顶部调登录

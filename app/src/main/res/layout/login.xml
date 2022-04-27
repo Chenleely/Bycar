@@ -114,6 +114,26 @@
             android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
+        android:background="@drawable/create_user_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/back_register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="返回注册"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
         android:background="@drawable/create_user_btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
