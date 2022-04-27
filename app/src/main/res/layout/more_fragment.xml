@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
 
     android:id="@+id/moment_top_scroll"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:background="@drawable/round_bg_7"
         android:orientation="vertical"
@@ -13,12 +14,13 @@
         <RelativeLayout
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="310dp">
+            android:layout_height="250dp">
+
             <ImageView
-                android:src="@drawable/car_imt_2"
-                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="240dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/car_imt_2" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,17 +51,18 @@
                 android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:src="@drawable/moment_submit_ic" />
+
             <TextView
+                android:id="@+id/moment_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                android:text="Bycar用户"
-                android:layout_toLeftOf="@id/moment_user_avatar"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="5dp"
-                android:id="@+id/moment_user_name"/>
+                android:layout_marginBottom="20dp"
+                android:layout_toLeftOf="@id/moment_user_avatar"
+                android:text="Bycar用户"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
 
         </RelativeLayout>
         <LinearLayout
@@ -83,4 +86,4 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

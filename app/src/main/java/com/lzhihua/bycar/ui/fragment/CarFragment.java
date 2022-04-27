@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +48,10 @@ public class CarFragment extends Fragment{
 
             }
         });
+        int height=getContext().getResources().getDisplayMetrics().heightPixels;
+        int width=getContext().getResources().getDisplayMetrics().widthPixels;
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(width,height);
+        carFragmentBinding.carFragmentPurchase.getRoot().setLayoutParams(lp);
         carFragmentBinding.carFragmentTopView.carFragTopBuyCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

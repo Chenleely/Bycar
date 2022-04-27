@@ -12,6 +12,7 @@ import com.lzhihua.bycar.R;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -81,36 +82,6 @@ public class NetworkUtil implements IHttpRequest {
             }
         });
     }
-
-    @Override
-    public void doPost(String url, Map<String, String> params, NetWorkListener listener) {
-        doPost(url, params, null, listener);
-    }
-
-    @Override
-    public void doPost(String url, Map<String, String> params, NetworkRepo.OkhttpOption okhttpOption, NetWorkListener listener) {
-        url = NetworkRepo.Base_url + url;
-        url = NetworkRepo.appendUri(url, params);
-        FormBody.Builder builder = new FormBody.Builder();
-        builder = configPostParams(builder, params);
-        FormBody body = builder.build();
-        Request.Builder requestBuilder = new Request.Builder().url(url).post(body).tag(okhttpOption == null ? "" : okhttpOption);
-        requestBuilder = configHeaders(requestBuilder, okhttpOption);
-        Request request = requestBuilder.build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                handleError(e, listener);
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                handlerResult(response, listener);
-            }
-        });
-    }
-
     //上传json
     @Override
     public void doPost(String url, String json, NetWorkListener listener) {
@@ -154,16 +125,26 @@ public class NetworkUtil implements IHttpRequest {
         });
     }
 
-//    上传文件
+//    多图片上传
     @Override
-    public void doPost(String url,  Map<String,String> params,File file, MediaType type, NetWorkListener listener) {
+    public void doPost(String url, Map<String, String> params,String fileName, List<String> paths, NetWorkListener listener) {
         url=NetworkRepo.Base_url+url;
-        url=NetworkRepo.appendUri(url,params);
-        RequestBody fileBody=RequestBody.create(type,file);
-        RequestBody body=new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("carImg", file.getName(),fileBody)
-                .build();
+        //url=NetworkRepo.appendUri(url,params);
+        MultipartBody.Builder builder=new MultipartBody.Builder();
+        MediaType type=MediaType.parse("image/jpeg");
+        builder.setType(MultipartBody.FORM);
+        for (String path:paths){
+            File file=new File(path);
+            if (file!=null){
+                builder.addFormDataPart(fileName,file.getName(),RequestBody.create(type,file));
+            }
+        }
+        if (params!=null && params.keySet().size()>0){
+            for (String key:params.keySet()){
+                builder.addFormDataPart(key,params.get(key));
+            }
+        }
+        MultipartBody body=builder.build();
         Request request=new Request.Builder()
                 .url(url)
                 .post(body)

@@ -132,46 +132,69 @@ public class LoginBean {
      * 用户信息响应
      * */
     public static class UserInfo {
+        private String status;
+        private Data data;
+
+        public Data getData() {
+            return data;
+        }
+
+        public void setData(Data data) {
+            this.data = data;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
 
         public UserInfo() {
         }
 
-        private String userName;
-        private String userId;
-        private String phone;
-        private int type;
+        public static class Data {
+            private String userName;
+            private String userId;
+            private String phone;
+            private int type;
 
-        public void setUserName(String userName) {
-            this.userName = userName;
+            public Data() {
+
+            }
+
+            public void setUserName(String userName) {
+                this.userName = userName;
+            }
+
+            public String getUserName() {
+                return userName;
+            }
+
+            public void setUserId(String userId) {
+                this.userId = userId;
+            }
+
+            public String getUserId() {
+                return userId;
+            }
+
+            public void setPhone(String phone) {
+                this.phone = phone;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
+
+            public int getType() {
+                return type;
+            }
         }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public void setUserId(String userId) {
-            this.userId = userId;
-        }
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public void setPhone(String phone) {
-            this.phone = phone;
-        }
-
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public int getType() {
-            return type;
-        }
-
     }
 }

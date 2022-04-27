@@ -21,8 +21,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lzhihua.bycar.R;
+import com.lzhihua.bycar.bean.CarBean;
+import com.lzhihua.bycar.bean.CommunityBean;
 import com.lzhihua.bycar.common.BaseActivity;
+import com.lzhihua.bycar.network.DataSuccessListenter;
+import com.lzhihua.bycar.repo.CommunityRepo;
 import com.lzhihua.bycar.ui.adapter.ReleaseAdapter;
+import com.lzhihua.bycar.util.UITools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +68,24 @@ public class ReleaseMessageactivity extends BaseActivity implements ReleaseAdapt
         submit.setOnClickListener(view -> {
             String text=editText.getText().toString().trim();
             if (!TextUtils.isEmpty(text)){
+                showProgress();
+                CommunityRepo.createMoment(text, adapter.getmList(), new DataSuccessListenter() {
+                    @Override
+                    public void onDataSuccess(Object obj) {
+                        dismissProgress();
+                        CommunityBean.CreateCommentResp createCommentRespc=(CommunityBean.CreateCommentResp) obj;
+                        Intent intent=new Intent();
+                        intent.putExtra("result",createCommentRespc);
+                        setResult(RESULT_OK,intent);
+                        finish();
+                    }
 
+                    @Override
+                    public void onError(String error) {
+                        dismissProgress();
+                        UITools.showToast(ReleaseMessageactivity.this,"发送失败，稍后重试");
+                    }
+                });
             }
         });
         addImage.setOnClickListener(view -> {

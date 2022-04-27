@@ -39,6 +39,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_manage_order.xml" value="0.25" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_manage_tryar.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_manager.xml" value="0.3609375" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/activity_mine_moments.xml" value="0.11479761114797611" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_moment_detail.xml" value="0.23378378378378378" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_notice.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/activity_order_list.xml" value="0.33125" />
@@ -53,7 +54,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fraggment_top_view.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment.xml" value="0.23060188542422044" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_bottom.xml" value="0.33125" />
-        <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_purshase.xml" value="0.33125" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_purshase.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_fragment_try_car.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/car_order_card.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/card_know_more.xml" value="0.2" />
@@ -62,6 +63,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/choose_city_dialog.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/choose_city_item.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/choose_date_dialog.xml" value="0.33" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/comment_item.xml" value="0.25" />
         <entry key="..\:/Bycar/app/src/main/res/layout/commmon_text_view_1.xml" value="0.14814814814814814" />
         <entry key="..\:/Bycar/app/src/main/res/layout/common_dialog_list.xml" value="0.15185185185185185" />
         <entry key="..\:/Bycar/app/src/main/res/layout/common_dialog_top.xml" value="0.33125" />
@@ -72,6 +74,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/filter_item_dialog.xml" value="0.11479761114797611" />
         <entry key="..\:/Bycar/app/src/main/res/layout/forget_password.xml" value="0.16134751773049646" />
         <entry key="..\:/Bycar/app/src/main/res/layout/impair_fragment.xml" value="0.33" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/input_comment_dialog.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/login.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/manage_after_item.xml" value="0.22" />
         <entry key="..\:/Bycar/app/src/main/res/layout/manage_trycar_item.xml" value="0.2" />
@@ -82,6 +85,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/mine_fragment.xml" value="0.33125" />
         <entry key="..\:/Bycar/app/src/main/res/layout/mine_title.xml" value="0.33" />
         <entry key="..\:/Bycar/app/src/main/res/layout/moment_comment_item.xml" value="0.23378378378378378" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/moment_detail_img.xml" value="0.1" />
         <entry key="..\:/Bycar/app/src/main/res/layout/moment_fast_way.xml" value="0.23378378378378378" />
         <entry key="..\:/Bycar/app/src/main/res/layout/moment_img_item.xml" value="0.23378378378378378" />
         <entry key="..\:/Bycar/app/src/main/res/layout/moment_item.xml" value="0.23378378378378378" />
@@ -94,6 +98,7 @@
         <entry key="..\:/Bycar/app/src/main/res/layout/order_list_card.xml" value="0.33" />
         <entry key="..\:/Bycar/app/src/main/res/layout/purchase_car_card.xml" value="0.25" />
         <entry key="..\:/Bycar/app/src/main/res/layout/release_photo_item_single.xml" value="0.36041666666666666" />
+        <entry key="..\:/Bycar/app/src/main/res/layout/show_bigimg.xml" value="0.1" />
         <entry key="..\:/Bycar/app/src/main/res/layout/test_dialog.xml" value="0.15374873353596757" />
         <entry key="..\:/Bycar/app/src/main/res/xml/network_security_config.xml" value="0.12409420289855072" />
       </map>

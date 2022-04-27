@@ -7,7 +7,9 @@ import com.lzhihua.bycar.network.DataSuccessListenter;
 import com.lzhihua.bycar.network.NetworkUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -136,22 +138,24 @@ public class ManagerRepo {
         });
     }
 
-    public static void UploadCarImg(File file,int id,final DataSuccessListenter listenter){
+    public static void UploadCarImg(String path,int id,final DataSuccessListenter listenter){
         Map<String,String> params=new HashMap<>();
         params.put("Id",id+"");
         MediaType mediaType = MediaType.parse("image/jpeg");
-        NetworkUtil.getInstance().doPost(UploadCarImg, params, new File(""), mediaType, new NetworkUtil.NetWorkListener() {
-            @Override
-            public void onSuccess(String response) {
-                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
-                listenter.onDataSuccess(commonResponse);
-            }
-
-            @Override
-            public void onFailed(String errorMsg) {
-                listenter.onError(errorMsg);
-            }
-        });
+        List<String> paths=new ArrayList<>();
+        paths.add(path);
+//        NetworkUtil.getInstance().doPost(UploadCarImg, params,paths, new NetworkUtil.NetWorkListener() {
+//            @Override
+//            public void onSuccess(String response) {
+//                CarBean.CommonResponse commonResponse=JSON.parseObject(response, CarBean.CommonResponse.class);
+//                listenter.onDataSuccess(commonResponse);
+//            }
+//
+//            @Override
+//            public void onFailed(String errorMsg) {
+//                listenter.onError(errorMsg);
+//            }
+//        });
     }
 
     public static void  getAfterOrderList(int limit, int offset, int type,final DataSuccessListenter listenter){

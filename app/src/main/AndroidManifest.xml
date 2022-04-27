@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bycar">
         <activity
+            android:name=".MineMomentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MomentDetailActivity"
             android:exported="false" />
         <activity

@@ -362,7 +362,7 @@ public class AfterOrderBean {
             return data;
         }
 
-        public static class User {
+        public static class User implements Serializable{
             public User() {
             }
 

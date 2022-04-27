@@ -42,4 +42,16 @@
         android:text="2022 4-16 19:00"
         android:textColor="@color/sub_color"
         android:textSize="14dp" />
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除"
+        android:id="@+id/comment_item_del"
+        android:textSize="14dp"
+        android:textColor="@color/sub_color"
+        android:layout_alignParentRight="true"
+        android:gravity="end"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/moment_item_time"/>
 </RelativeLayout>

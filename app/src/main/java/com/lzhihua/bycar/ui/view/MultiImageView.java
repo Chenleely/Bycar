@@ -1,5 +1,6 @@
 package com.lzhihua.bycar.ui.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -14,7 +15,6 @@ import java.util.List;
 //微信朋友圈多图加载功能
 public class MultiImageView extends LinearLayout {
     public static int MAX_WIDTH = 0;
-
     // 照片的Url列表
     private List<String> imagesList;
 
@@ -186,12 +186,14 @@ public class MultiImageView extends LinearLayout {
             imageView.setLayoutParams(onePicPara);
         }
 
+        imageView.setTag(url);
         imageView.setId(url.hashCode());
         imageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                String url= (String) v.getTag();
                 if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(v, position);
+                    mOnItemClickListener.onItemClick(v, url);
                 }
             }
         });
@@ -201,6 +203,6 @@ public class MultiImageView extends LinearLayout {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, String url);
     }
 }

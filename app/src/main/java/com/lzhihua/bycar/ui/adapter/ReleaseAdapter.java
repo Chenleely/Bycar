@@ -33,6 +33,11 @@ public class ReleaseAdapter extends RecyclerView.Adapter  {
         this.mList = mList;
         notifyDataSetChanged();
     }
+
+    public List<String> getmList() {
+        return mList;
+    }
+
     public void addItem(String path){
         this.mList.add(path);
         notifyDataSetChanged();
